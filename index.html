@@ -80,8 +80,7 @@
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># initiate git submodules</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># git submodule update --init</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># to start</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../irods_demo</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div>
 <p>Provide the host name of the server to connect an R project with an iRODS server, like so:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/irods/irods_client_library_rirods" class="external-link">rirods</a></span><span class="op">)</span></span>
@@ -172,13 +171,11 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># or where data objects named "foo" can be found</span></span>
 <span><span class="fu"><a href="reference/imeta.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   collection        data_object</span></span>
-<span><span class="co">#&gt; 1       /tempZone/home/bobby                foo</span></span>
-<span><span class="co">#&gt; 2       /tempZone/home/bobby            foo.csv</span></span>
-<span><span class="co">#&gt; 3 /tempZone/trash/home/bobby                foo</span></span>
-<span><span class="co">#&gt; 4 /tempZone/trash/home/bobby     foo.2309812103</span></span>
-<span><span class="co">#&gt; 5 /tempZone/trash/home/bobby            foo.csv</span></span>
-<span><span class="co">#&gt; 6 /tempZone/trash/home/bobby foo.csv.2597355982</span></span></code></pre></div>
+<span><span class="co">#&gt;                   collection data_object</span></span>
+<span><span class="co">#&gt; 1       /tempZone/home/bobby         foo</span></span>
+<span><span class="co">#&gt; 2       /tempZone/home/bobby     foo.csv</span></span>
+<span><span class="co">#&gt; 3 /tempZone/trash/home/bobby         foo</span></span>
+<span><span class="co">#&gt; 4 /tempZone/trash/home/bobby     foo.csv</span></span></code></pre></div>
 <p>Finally, we can clean up Bobby’s home directory:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># delete object</span></span>
@@ -226,8 +223,8 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/MartinSchobben/irods_client_library_rirods?branch=dev" class="external-link"><img src="https://codecov.io/gh/MartinSchobben/irods_client_library_rirods/branch/dev/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/MartinSchobben/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/MartinSchobben/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/irods/irods_client_library_rirods?branch=dev" class="external-link"><img src="https://codecov.io/gh/irods/irods_client_library_rirods/branch/dev/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

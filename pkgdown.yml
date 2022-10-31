@@ -2,8 +2,8 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-10-30T19:57Z
+last_built: 2022-10-31T07:35Z
 urls:
-  reference: https://martinschobben.github.io/irods_client_library_rirods/reference
-  article: https://martinschobben.github.io/irods_client_library_rirods/articles
+  reference: https://irods.github.io/irods_client_library_rirods/reference
+  article: https://irods.github.io/irods_client_library_rirods/articles
 
