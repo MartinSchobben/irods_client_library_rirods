@@ -26,7 +26,7 @@ devtools::install_github("irods/irods_client_library_rirods")
 This package connects to the iRODS C++ REST API -
 <https://github.com/irods/irods_client_rest_cpp>.
 
-The launch a local demonstration iRODS service (including the REST API):
+Launch a local demonstration iRODS service (including the REST API):
 
 ``` bash
 # clone the repository
@@ -50,7 +50,7 @@ credentials:
 library(rirods)
 
 # connect
-create_irods("http://localhost/irods-rest/0.9.3")
+create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
 ```
 
 ### authentication
@@ -97,8 +97,9 @@ imeta(
 
 # check if file is stored with associated metadata
 ils(metadata = TRUE)
-#>               logical_path      metadata        type
-#> 1 /tempZone/home/bobby/foo foo, bar, baz data_object
+#>                logical_path      metadata        type
+#> 1  /tempZone/home/bobby/foo foo, baz, bar data_object
+#> 2 /tempZone/home/bobby/test          NULL data_object
 ```
 
 ### get
@@ -134,6 +135,7 @@ ils()
 #>                   logical_path        type
 #> 1     /tempZone/home/bobby/foo data_object
 #> 2 /tempZone/home/bobby/foo.csv data_object
+#> 3    /tempZone/home/bobby/test data_object
 ```
 
 Later on somebody else might want to download this file again and store
@@ -171,10 +173,11 @@ iquery("SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/%'")
 #>             collection data_object
 #> 1 /tempZone/home/bobby         foo
 #> 2 /tempZone/home/bobby     foo.csv
+#> 3 /tempZone/home/bobby        test
 ```
 
 ``` r
-# or where data objects named "foo" can be found
+# or for data objects with a name that starts with "foo"
 iquery("SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'")
 #>             collection data_object
 #> 1 /tempZone/home/bobby         foo
@@ -192,7 +195,8 @@ irm("foo.csv", trash = FALSE)
 
 # check if objects are removed
 ils()
-#> This collection does not contain any objects or collections.
+#>                logical_path        type
+#> 1 /tempZone/home/bobby/test data_object
 ```
 
 <!-- The user Bobby can also be removed again. -->

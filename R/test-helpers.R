@@ -1,7 +1,7 @@
 # remove httptest2 mock files
 remove_mock_files <- function() {
   # find the mock dirs
-  pt <- file.path(usethis::proj_get(), testthat::test_path())
+  pt <- file.path(getwd(), testthat::test_path())
   fls <- list.files(pt, include.dirs = TRUE)
   mockers <- fls[!grepl(pattern = "((.*)\\..*$)|(^_)",  x= fls)]
   # remove mock dirs
@@ -30,3 +30,4 @@ local_create_irods <- function(
 
   invisible(dir)
 }
+

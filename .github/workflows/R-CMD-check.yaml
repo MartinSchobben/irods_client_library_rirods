@@ -104,11 +104,13 @@ jobs:
         run: |
           cp -TR ./rirods/check/**/tests/testthat/ ./rirods/tests/testthat/
           cd ./rirods
-          rm ./tests/testthat/.gitignore
+          mv ./tests/testthat/.gitignore ./tests/testthat/gitignore
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add ./tests/testthat/\*
+          git add ./tests/testthat/\*\*/\*\.R
           git commit -m "Snapshots http response" || echo "No changes to commit"
           git pull --ff-only
           git push origin
+          git rm --cached tests/testthat/\*\*/\*.R
+          mv ./tests/testthat/gitignore ./tests/testthat/.gitignore
 
