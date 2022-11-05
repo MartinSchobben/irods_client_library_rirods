@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/irods/irods_client_library_rirods/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/irods/irods_client_library_rirods?branch=dev)
+coverage](https://codecov.io/gh/irods/irods_client_library_rirods/branch/main/graph/badge.svg)](https://app.codecov.io/gh/irods/irods_client_library_rirods?branch=main)
 [![R-CMD-check](https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -26,14 +26,14 @@ devtools::install_github("irods/irods_client_library_rirods")
 This package connects to the iRODS C++ REST API -
 <https://github.com/irods/irods_client_rest_cpp>.
 
-The launch a local demonstration iRODS service (including the REST API):
+Launch a local demonstration iRODS service (including the REST API):
 
 ``` bash
 # clone the repository
 git clone --recursive https://github.com/irods/irods_demo
 # start the REST API
 cd irods_demo
-docker-compose up nginx-reverse-proxy
+docker-compose up -d nginx-reverse-proxy
 ```
 
 This will result in the demonstration REST API running at
@@ -50,7 +50,7 @@ credentials:
 library(rirods)
 
 # connect
-create_irods("http://localhost/irods-rest/0.9.3")
+create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
 ```
 
 ### authentication
@@ -174,7 +174,7 @@ iquery("SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/%'")
 ```
 
 ``` r
-# or where data objects named "foo" can be found
+# or for data objects with a name that starts with "foo"
 iquery("SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'")
 #>             collection data_object
 #> 1 /tempZone/home/bobby         foo

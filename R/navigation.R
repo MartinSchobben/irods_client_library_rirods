@@ -46,17 +46,27 @@ icd  <- function(dir) {
   # get requested dir
   if (!dir %in% c(".", "..")) {
 
-    if(!grepl("\\.\\./", dir)) {
+    if(!grepl("^\\.{1,2}/", dir)) {
       current_dir <- dir
     } else {
-      base_dir <- icd(".")
-      current_dir <- paste0(
-        base_dir,
-        ifelse(base_dir == "/", "", "/"), sub("\\.\\./", "", dir)
-      )
+      if(grepl("^\\.{2}/", dir)) {
+        base_dir <- icd("..")
+
+        current_dir <- paste0(
+          base_dir,
+          ifelse(base_dir == "/", "", "/"), sub("\\.\\./", "", dir)
+        )
+      } else if(grepl("^\\.{1}/", dir)) {
+        base_dir <- icd(".")
+
+        current_dir <- paste0(
+          base_dir,
+          ifelse(base_dir == "/", "", "/"), sub("\\./", "", dir)
+        )
+      }
     }
 
-    # check if irods collecion exists
+    # check if irods collection exists
     if (!is_collection(current_dir))
       stop("This is not a directory (collection).", call. = FALSE)
 
@@ -134,7 +144,7 @@ ils <- function(
     check_type = FALSE,
     simplifyVector = TRUE
   )$`_embedded` |>
-    as.data.frame()
+  as.data.frame()
 
   # metadata reordering
   if (isTRUE(metadata)) {
