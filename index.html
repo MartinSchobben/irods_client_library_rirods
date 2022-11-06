@@ -98,7 +98,7 @@
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recursive</span> https://github.com/irods/irods_demo</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># start the REST API</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> irods_demo</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up nginx-reverse-proxy</span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span> nginx-reverse-proxy</span></code></pre></div>
 <p>This will result in the demonstration REST API running at <a href="http://localhost/irods-rest/0.9.3" class="external-link uri">http://localhost/irods-rest/0.9.3</a> (or later version).</p>
 </div>
 <div class="section level2">
@@ -149,9 +149,8 @@
 <span></span>
 <span><span class="co"># check if file is stored with associated metadata</span></span>
 <span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                logical_path      metadata        type</span></span>
-<span><span class="co">#&gt; 1  /tempZone/home/bobby/foo foo, baz, bar data_object</span></span>
-<span><span class="co">#&gt; 2 /tempZone/home/bobby/test          NULL data_object</span></span></code></pre></div>
+<span><span class="co">#&gt;               logical_path      metadata        type</span></span>
+<span><span class="co">#&gt; 1 /tempZone/home/bobby/foo foo, bar, baz data_object</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="get">get<a class="anchor" aria-label="anchor" href="#get"></a>
@@ -182,8 +181,7 @@
 <span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                   logical_path        type</span></span>
 <span><span class="co">#&gt; 1     /tempZone/home/bobby/foo data_object</span></span>
-<span><span class="co">#&gt; 2 /tempZone/home/bobby/foo.csv data_object</span></span>
-<span><span class="co">#&gt; 3    /tempZone/home/bobby/test data_object</span></span></code></pre></div>
+<span><span class="co">#&gt; 2 /tempZone/home/bobby/foo.csv data_object</span></span></code></pre></div>
 <p>Later on somebody else might want to download this file again and store it locally:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve it again later</span></span>
@@ -213,8 +211,7 @@
 <span><span class="fu"><a href="reference/imeta.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/%'"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;             collection data_object</span></span>
 <span><span class="co">#&gt; 1 /tempZone/home/bobby         foo</span></span>
-<span><span class="co">#&gt; 2 /tempZone/home/bobby     foo.csv</span></span>
-<span><span class="co">#&gt; 3 /tempZone/home/bobby        test</span></span></code></pre></div>
+<span><span class="co">#&gt; 2 /tempZone/home/bobby     foo.csv</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># or for data objects with a name that starts with "foo"</span></span>
 <span><span class="fu"><a href="reference/imeta.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'"</span><span class="op">)</span></span>
@@ -233,8 +230,7 @@
 <span></span>
 <span><span class="co"># check if objects are removed</span></span>
 <span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                logical_path        type</span></span>
-<span><span class="co">#&gt; 1 /tempZone/home/bobby/test data_object</span></span></code></pre></div>
+<span><span class="co">#&gt; This collection does not contain any objects or collections.</span></span></code></pre></div>
 <!-- The user Bobby can also be removed again. -->
 </div>
 </div>
@@ -274,7 +270,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/irods/irods_client_library_rirods?branch=dev" class="external-link"><img src="https://codecov.io/gh/irods/irods_client_library_rirods/branch/dev/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/irods/irods_client_library_rirods?branch=main" class="external-link"><img src="https://codecov.io/gh/irods/irods_client_library_rirods/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/irods/irods_client_library_rirods/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
