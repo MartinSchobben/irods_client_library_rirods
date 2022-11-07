@@ -30,7 +30,7 @@ https://usethis.r-lib.org/ for common development tasks and setups covered by
 these packages.
 
 Development of `rirods` relies on the `httptest2` which enables testing of the 
-logic on the R sides of the API without requiring access to the remote service.
+logic on the R side of the API without requiring access to the remote service.
 It does this by recording the API response as mock files. These mock files are 
 stored in several directories under `.tests/testthat/`. To enable testing
 against the real API one needs to remove these mock files. The helper 
@@ -41,8 +41,8 @@ called.
 ## Prerequisites iRODS
 
 The unit test included in the source files can either be run against a local or 
-remote iRODS server. The iRODS server should include the iRODS C++ REST API of 
-0.9.3 or later - https://github.com/irods/irods_client_rest_cpp.
+remote iRODS C++ REST API service, version 0.9.3 or later - 
+https://github.com/irods/irods_client_rest_cpp.
 
 ### Local server
 
@@ -61,7 +61,7 @@ No further configuration in R is needed for development (except for removing
 possible mock files). For example, to run the unit tests against this local 
 server use: `devtools::test()`.
 
-For miscellaneous development tasks one can, furthermore, use the none-exported 
+For miscellaneous development tasks one can, furthermore, use the non-exported 
 function: `local_create_irods()`. This test fixture is almost the same as the
 exported function `create_irods()` except that it uses a temporary directory as 
 the working directory thereby preventing cluttering of the package source files.
@@ -125,7 +125,7 @@ and password under `DEV_PASS`.
 
 5) Restart the R sessions (possibly with `CTRL + SHIFT + F10`).
 
-Note, that the unit tests are build against a clean server with only one user 
+Note that the unit tests are built against a clean server with only one user 
 (i.e., `DEV_USER`). In addition, one should not forget to remove the mock files
 (e.g., with `remove_mock_files()`, see above) to test against the real server.
 
