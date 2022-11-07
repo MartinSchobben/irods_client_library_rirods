@@ -14,10 +14,16 @@ with_mock_dir("navigation", {
     expect_equal(ipwd(), def_path)
 
     # relative paths work as well
+    expect_invisible(icd("testthat"))
+    expect_equal(ipwd(), dev_path)
+
+    icd("..") # move back to execute following test
+
+    # relative paths work as well
     expect_invisible(icd("./testthat"))
     expect_equal(ipwd(), dev_path)
 
-    # path on the same level
+    # relative path in the same parent
     expect_invisible(icd("../projectx"))
     expect_equal(ipwd(), proj_path)
 

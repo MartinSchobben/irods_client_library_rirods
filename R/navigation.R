@@ -1,4 +1,4 @@
-#' Retrieve an object from iRODS
+#' Change/show current working directory
 #'
 #' @param dir Change the current directory to DIR.  The default DIR is the value
 #'  of the HOME shell variable.
@@ -47,9 +47,19 @@ icd  <- function(dir) {
   if (!dir %in% c(".", "..")) {
 
     if(!grepl("^\\.{1,2}/", dir)) {
-      current_dir <- dir
+
+      if (grepl("^\\/", dir)) {
+        # absolute path
+        current_dir <- dir
+      } else {
+        # relative path
+        current_dir <- paste0(local(current_dir, envir = .rirods), "/", dir)
+      }
+
     } else {
       if(grepl("^\\.{2}/", dir)) {
+
+        # movement relative path
         base_dir <- icd("..")
 
         current_dir <- paste0(
@@ -57,6 +67,7 @@ icd  <- function(dir) {
           ifelse(base_dir == "/", "", "/"), sub("\\.\\./", "", dir)
         )
       } else if(grepl("^\\.{1}/", dir)) {
+        # no movement relative path
         base_dir <- icd(".")
 
         current_dir <- paste0(
