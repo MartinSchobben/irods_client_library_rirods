@@ -59,33 +59,28 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck any::pkgload
-          needs: check
+      - name: Install system dependencies
+        if: startsWith(runner.os, 'Linux')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev
 
-      # - name: Install system dependencies
-      #   if: startsWith(runner.os, 'Linux')
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y libcurl4-openssl-dev
-      #
-      # - name: Cache packages
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: ${{ env.RENV_PATHS_ROOT }}
-      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-renv-
-      #
-      # - name: Restore packages
-      #   working-directory: ./rirods
-      #   shell: Rscript {0}
-      #   run: |
-      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-      #     if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")
-      #     if (!requireNamespace("pkgload", quietly = TRUE)) install.packages("pkgload")
-      #     renv::restore()
+      - name: Cache packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        working-directory: ./rirods
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")
+          if (!requireNamespace("pkgload", quietly = TRUE)) install.packages("pkgload")
+          renv::restore()
 
 # On linux we remove httptest2 mock files to force a realistic test against
 # the irods_demo server
