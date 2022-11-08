@@ -3,7 +3,7 @@
 \name{icd}
 \alias{icd}
 \alias{ipwd}
-\title{Retrieve an object from iRODS}
+\title{Change/show current working directory}
 \usage{
 icd(dir)
 
@@ -17,7 +17,7 @@ of the HOME shell variable.}
 Visibly or invisibly returns the path.
 }
 \description{
-Retrieve an object from iRODS
+Change/show current working directory
 }
 \examples{
 if(interactive()) {

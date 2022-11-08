@@ -1,4 +1,9 @@
-#' Working with data objects
+#' Working with iRODS data objects
+#'
+#' Store a file into iRODS with `iput()`. If the destination data-object or
+#' collection are not provided, the current iRODS directory and the input file
+#' name are used. Get data-objects or collections from iRODS space with `iget()`
+#' , either to the specified local area or to the current working directory.
 #'
 #' @param x R object stored on iRODS server.
 #' @param path Destination path.
@@ -8,7 +13,10 @@
 #' @param verbose Show information about the http request and response.
 #' @param overwrite Overwrite irods object or local file (defaults to FALSE).
 #'
-#' @return R object
+#' @return Invisibly the http response in case of `iput()`, or invisibly NULL
+#' or an R object in case of `iget()` either obtaining a foreign file format or
+#' a native R object.
+#'
 #' @export
 #'
 #' @examples
@@ -127,4 +135,5 @@ iget  <- function(
     readRDS(gzcon(con))
   }
 
+  invisible(NULL)
 }
