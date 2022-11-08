@@ -2,7 +2,7 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, fix-navigation]
   pull_request:
     branches: [main, dev]
 
@@ -59,28 +59,33 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install system dependencies
-        if: startsWith(runner.os, 'Linux')
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev
-
-      - name: Cache packages
-        uses: actions/cache@v1
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
+          extra-packages: any::rcmdcheck any::pkgload
+          needs: check
 
-      - name: Restore packages
-        working-directory: ./rirods
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")
-          if (!requireNamespace("pkgload", quietly = TRUE)) install.packages("pkgload")
-          renv::restore()
+      # - name: Install system dependencies
+      #   if: startsWith(runner.os, 'Linux')
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y libcurl4-openssl-dev
+      #
+      # - name: Cache packages
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ${{ env.RENV_PATHS_ROOT }}
+      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-renv-
+      #
+      # - name: Restore packages
+      #   working-directory: ./rirods
+      #   shell: Rscript {0}
+      #   run: |
+      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+      #     if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")
+      #     if (!requireNamespace("pkgload", quietly = TRUE)) install.packages("pkgload")
+      #     renv::restore()
 
 # On linux we remove httptest2 mock files to force a realistic test against
 # the irods_demo server
