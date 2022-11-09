@@ -95,7 +95,7 @@ dependencies. The <code>usethis</code> and the <code>devtools</code>
 packages are further suggestions to streamline development. See <a href="https://devtools.r-lib.org/" class="external-link uri">https://devtools.r-lib.org/</a> and <a href="https://usethis.r-lib.org/" class="external-link uri">https://usethis.r-lib.org/</a> for common development tasks
 and setups covered by these packages.</p>
 <p>Development of <code>rirods</code> relies on the
-<code>httptest2</code> which enables testing of the logic on the R sides
+<code>httptest2</code> which enables testing of the logic on the R side
 of the API without requiring access to the remote service. It does this
 by recording the API response as mock files. These mock files are stored
 in several directories under <code>.tests/testthat/</code>. To enable
@@ -108,8 +108,8 @@ function is not exported and needs to be sourced (e.g., using
 <h2 id="prerequisites-irods">Prerequisites iRODS<a class="anchor" aria-label="anchor" href="#prerequisites-irods"></a>
 </h2>
 <p>The unit test included in the source files can either be run against
-a local or remote iRODS server. The iRODS server should include the
-iRODS C++ REST API of 0.9.3 or later - <a href="https://github.com/irods/irods_client_rest_cpp" class="external-link uri">https://github.com/irods/irods_client_rest_cpp</a>.</p>
+a local or remote iRODS C++ REST API service, version 0.9.3 or later -
+<a href="https://github.com/irods/irods_client_rest_cpp" class="external-link uri">https://github.com/irods/irods_client_rest_cpp</a>.</p>
 <div class="section level3">
 <h3 id="local-server">Local server<a class="anchor" aria-label="anchor" href="#local-server"></a>
 </h3>
@@ -125,7 +125,7 @@ further configuration in R is needed for development (except for
 removing possible mock files). For example, to run the unit tests
 against this local server use: <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code>.</p>
 <p>For miscellaneous development tasks one can, furthermore, use the
-none-exported function: <code>local_create_irods()</code>. This test
+non-exported function: <code>local_create_irods()</code>. This test
 fixture is almost the same as the exported function
 <code><a href="../reference/create_irods.html">create_irods()</a></code> except that it uses a temporary directory as
 the working directory thereby preventing cluttering of the package
@@ -190,7 +190,7 @@ user name under <code>DEV_USER</code>, and password under
 <li><p>Restart the R sessions (possibly with
 <code>CTRL + SHIFT + F10</code>).</p></li>
 </ol>
-<p>Note, that the unit tests are build against a clean server with only
+<p>Note that the unit tests are built against a clean server with only
 one user (i.e., <code>DEV_USER</code>). In addition, one should not
 forget to remove the mock files (e.g., with
 <code>remove_mock_files()</code>, see above) to test against the real
