@@ -60,10 +60,16 @@ moved to the trash collection when removed.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">irm</span><span class="op">(</span><span class="va">x</span>, trash <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span>, unregister <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">irm</span><span class="op">(</span></span>
+<span>  <span class="va">lpath</span>,</span>
+<span>  trash <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  unregister <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">imkdir</span><span class="op">(</span></span>
-<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">lpath</span>,</span>
 <span>  collection <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  create_parent_collections <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -72,8 +78,8 @@ moved to the trash collection when removed.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>x</dt>
-<dd><p>R object stored on iRODS server.</p></dd>
+    <dl><dt>lpath</dt>
+<dd><p>Destination path.</p></dd>
 
 
 <dt>trash</dt>
@@ -125,13 +131,13 @@ collection = TRUE is used. Defaults to FALSE.</p></dd>
 <span class="r-in"><span><span class="va">foo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># store</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="iput.html">iput</a></span><span class="op">(</span><span class="va">foo</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iput.html">iput</a></span><span class="op">(</span><span class="va">foo</span>, <span class="st">"foo.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># check if file is stored</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># delete object</span></span></span>
-<span class="r-in"><span><span class="fu">irm</span><span class="op">(</span><span class="st">"foo"</span>, trash <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">irm</span><span class="op">(</span><span class="st">"foo.rds"</span>, trash <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create collection</span></span></span>
 <span class="r-in"><span><span class="fu">imkdir</span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span></span></span>
