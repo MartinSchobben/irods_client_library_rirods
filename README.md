@@ -34,6 +34,9 @@ git clone --recursive https://github.com/irods/irods_demo
 # start the REST API
 cd irods_demo
 docker-compose up -d nginx-reverse-proxy
+# create user
+docker exec irods_demo-irods-client-icommands-1 iadmin mkuser bobby rodsuser
+docker exec irods_demo-irods-client-icommands-1 iadmin moduser bobby password passWORD
 ```
 
 This will result in the demonstration REST API running at
