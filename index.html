@@ -116,7 +116,7 @@
 <div class="section level3">
 <h3 id="authentication">authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h3>
-<p>In this example Alice is a user of iRODS and he can authenticate himself with <code><a href="reference/iauth.html">iauth()</a></code>. This prompts a dialog where you can enter your username and password without hardcoding this information in your scripts.</p>
+<p>In this example Alice is a user of iRODS and she can authenticate herself with <code><a href="reference/iauth.html">iauth()</a></code>. This prompts a dialog where you can enter your username and password without hardcoding this information in your scripts.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># login as Alice with password "passWORD"</span></span>
 <span><span class="fu"><a href="reference/iauth.html">iauth</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># or iauth("alice", "passWORD")</span></span></code></pre></div>
@@ -157,7 +157,7 @@
 <div class="section level3">
 <h3 id="read-r-objects">read R objects<a class="anchor" aria-label="anchor" href="#read-r-objects"></a>
 </h3>
-<p>If Alice wanted to copy the foo R object from an iRODS collection to his current R session, he would use <code><a href="reference/isaveRDS.html">ireadRDS()</a></code>:</p>
+<p>If Alice wanted to copy the foo R object from an iRODS collection to his current R session, she would use <code><a href="reference/isaveRDS.html">ireadRDS()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve in native R format</span></span>
 <span><span class="fu"><a href="reference/isaveRDS.html">ireadRDS</a></span><span class="op">(</span><span class="st">"foo.rds"</span><span class="op">)</span></span>
