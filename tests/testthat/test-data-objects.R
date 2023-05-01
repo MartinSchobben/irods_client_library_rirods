@@ -1,4 +1,4 @@
-with_mock_dir("data-objects", {
+# with_mock_dir("data-objects", {
   test_that("external data-objects management works", {
 
     # I use the argument overwrite = TRUE here so that the
@@ -8,31 +8,31 @@ with_mock_dir("data-objects", {
     # currently mocking does not work
     skip_if(.rirods$token == "secret", "IRODS server unavailable")
 
-    # small dataset
+    # store small R object in iRODS
     dfr <- data.frame(a = c("a", "b", "c"), b = 1:3, c = 6:8)
     expect_invisible(isaveRDS(dfr, "dfr.rds",  overwrite = TRUE))
     expect_equal(dfr, ireadRDS("dfr.rds",  overwrite = TRUE))
     expect_invisible(irm("dfr.rds"))
 
-    # large dataset (about two times default count of 2000)
+    # store large R object (about two times default count of 2000) in iRODS
     mt <- matrix(1:940, 94, 10)
     expect_invisible(isaveRDS(mt, "mt.rds", overwrite = TRUE))
     expect_equal(mt, ireadRDS("mt.rds"))
     expect_invisible(irm("mt.rds"))
 
-    # store file
+    # store file in iRODS
     expect_invisible(iput("foo.csv", overwrite = TRUE))
 
-    # retrieve object
+    # retrieve object from iRODS
     iget("foo.csv", overwrite = TRUE)
     expect_equal(read.csv("foo.csv"), foo)
 
-    # remove object
+    # remove object from iRODS
     expect_invisible(irm("foo.csv"))
   })
-},
-simplify = FALSE
-)
+# },
+# simplify = FALSE
+# )
 
 test_that("overwrite error works", {
 

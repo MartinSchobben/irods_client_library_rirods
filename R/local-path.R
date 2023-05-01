@@ -31,7 +31,15 @@ fuse_object <- function(x) {
 }
 
 # calculate chunk sizes
-calc_chunk_size <- function (object_size, count) {
+calc_chunk_size <- function(object_size, count) {
+  # stop if object size is less than  count
+  if (object_size < count)
+    stop("Object size smaller than count.", call. = FALSE)
+  # check that object size exceeds with more than 2 times
+  if (object_size %/% count == 1) {
+    # otherwise take half the count
+    count <- count / 2
+  }
   # try to find the number of chunks
   n <- object_size %/% count
   st <- sort(1:object_size %% n)
@@ -39,5 +47,5 @@ calc_chunk_size <- function (object_size, count) {
   ct <- as.integer(table(st))
   # offset
   of <- c(0, cumsum(ct)[1:length(ct)-1])
-  list(st, of, ct)
+  list(object = st, offset = of, count = ct)
 }

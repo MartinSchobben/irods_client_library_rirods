@@ -18,5 +18,8 @@ test_that("files can be chunked", {
 })
 
 test_that("chunk size can be calculated",{
-  expect_snapshot(calc_chunk_size(39, 10L))
+  expect_snapshot(calc_chunk_size(11, 10L))
+  expect_snapshot(calc_chunk_size(20, 10L))
+  expect_snapshot(calc_chunk_size(30, 10L))
+  expect_error(calc_chunk_size(0, 20L))
 })

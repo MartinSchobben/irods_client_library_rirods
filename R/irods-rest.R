@@ -54,12 +54,8 @@ data_switch <- function(type, req, object) {
 
   switch(
     type,
-    rds = httr2::req_body_file(req, object),
-    txt = ,
-    tsv = ,
-    csv = ,
     json = httr2::req_body_json(req, object, auto_unbox = TRUE, digits = NA,
                                 null = "null"),
-    httr2::req_body_raw(req, object)
+    object = httr2::req_body_raw(req, object)
   )
 }
