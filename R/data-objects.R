@@ -138,17 +138,16 @@ isaveRDS <- function(
 
   # serialize R object
   if (exists(name, envir = parent.frame())) {
-    # # make intermediate file
-    fil <- tempfile(name, fileext = ".rds")
-    # serialize and gz compress
-    saveRDS(x, fil)
+    # first 26 bytes ar always the same for R
+    # serialize(NULL, NULL)[-27]
+    raw_object <- serialize(x, connection = NULL)
   } else {
     stop("Local object [", name ,"] does not exist.", call. = FALSE)
   }
 
   # handle R object to iRODS conversion
   out <- local_to_irods(
-    local_path = fil,
+    local_path = raw_object,
     logical_path = logical_path,
     offset = offset,
     count = count,
@@ -159,35 +158,28 @@ isaveRDS <- function(
   invisible(out[[1]])
 }
 
-# vectorised object to irods conversion
+# vectorised object to irods conversion (local_path needs to be a raw object)
 local_to_irods <- function(local_path, logical_path, offset, count, truncate,
                            verbose) {
 
-  # when object is larger then cut object in pieces
-  if (file.size(local_path) > count) {
-    #---------------------------------------------------------------------------
-    # this is a hack to make it work
-    pl <- tempfile(
-      "place_holder",
-      fileext = paste0(".", tools::file_ext(local_path))
-    )
-    saveRDS("place_holder", pl)
-    # flags to curl call
-    args <- list(
+  # create placeholder object on iRODS with truncate is true in all cases
+  args <- list(
       `logical-path` = logical_path,
       offset = offset,
       count = count
-    )
-    irods_rest_call("stream", "PUT", args, verbose, pl)
-    truncate <- "false"
-    #---------------------------------------------------------------------------
-    x <- chunk_file(local_path, count)
+  )
+  irods_rest_call("stream", "PUT", args, verbose, NULL)
+
+  # chunk object when necessary
+  if (length(local_path) > count) {
+    truncate <- "false" # needs to be false for larger files
+    x <- chunk_object(local_path, count)
   } else {
     x <- list(local_path, offset = 0, count)
   }
 
-  # vectorised call of file which enables chunked file transfer in case of larger
-  # file size than `count` bytes
+  # vectorised call of file which enables chunked object transfer in case of
+  # larger object size than `count` bytes
   Map(
     function(x, y, z) {
       local_to_irods_(

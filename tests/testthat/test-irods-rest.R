@@ -20,3 +20,16 @@ with_mock_dir("irods-rest-call", {
   })
 })
 
+test_that("data switch works", {
+
+  # currently mocking does not work
+  skip_if(.rirods$token == "secret", "IRODS server unavailable")
+
+  req <- httr2::request(find_irods_file("host")) |>
+    httr2::req_url_path_append("stream") |>
+    httr2::req_headers(Authorization = local(token, envir = .rirods)) |>
+    httr2::req_method("PUT")
+
+  data_switch("csv", req, "foo.csv")
+  data_switch("", req, "foo.csv")
+})
