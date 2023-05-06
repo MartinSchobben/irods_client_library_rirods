@@ -1,6 +1,6 @@
 structure(list(method = "GET", url = "/stream?logical-path=%2FbobZone%2Fhome%2Fmartin%2Ftestthat%2Fdfr.rds&offset=0&count=2000", 
     status_code = 200L, headers = structure(list(Server = "nginx/1.18.0 (Ubuntu)", 
-        Date = "Sat, 06 May 2023 12:55:11 GMT", `Content-Length` = "400", 
+        Date = "Sat, 06 May 2023 13:13:32 GMT", `Content-Length` = "400", 
         Connection = "keep-alive", `Access-Control-Allow-Origin` = "*", 
         `Access-Control-Allow-Headers` = "*", `Access-Control-Allow-Methods` = "AUTHORIZATION,ACCEPT,GET,POST,OPTIONS,PUT,DELETE"), class = "httr2_headers"), 
     body = as.raw(c(0x58, 0x0a, 0x00, 0x00, 0x00, 0x03, 0x00, 

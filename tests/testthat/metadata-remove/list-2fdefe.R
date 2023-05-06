@@ -1,6 +1,6 @@
 structure(list(method = "GET", url = "/list?logical-path=%2FbobZone%2Fhome%2Fmartin%2Ftestthat&stat=0&permissions=0&metadata=1&offset=0&limit=100", 
     status_code = 200L, headers = structure(list(Server = "nginx/1.18.0 (Ubuntu)", 
-        Date = "Sat, 06 May 2023 12:55:19 GMT", `Content-Length` = "802", 
+        Date = "Sat, 06 May 2023 13:13:40 GMT", `Content-Length` = "802", 
         Connection = "keep-alive", `Access-Control-Allow-Origin` = "*", 
         `Access-Control-Allow-Headers` = "*", `Access-Control-Allow-Methods` = "AUTHORIZATION,ACCEPT,GET,POST,OPTIONS,PUT,DELETE"), class = "httr2_headers"), 
     body = as.raw(c(0x7b, 0x22, 0x5f, 0x65, 0x6d, 0x62, 0x65, 
