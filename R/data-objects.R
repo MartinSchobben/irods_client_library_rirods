@@ -175,7 +175,7 @@ local_to_irods <- function(object, logical_path, offset, count, truncate,
       offset = offset,
       count = count
   )
-  irods_rest_call("stream", "PUT", args, verbose, NULL)
+  irods_rest_call("stream", "PUT", args, verbose)
 
   # chunk object when necessary, this  is based on the REST API byte number
   # this is the parameter `count` of the stream end-point
