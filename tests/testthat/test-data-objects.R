@@ -1,12 +1,9 @@
-# with_mock_dir("data-objects", {
+with_mock_dir("data-objects", {
   test_that("external data-objects management works", {
 
     # I use the argument overwrite = TRUE here so that the
     # call to the list REST API is omitted. This omits an additional snapshot
     # for this REST call that is not the purpose of this test.
-
-    # currently mocking does not work
-    skip_if(.rirods$token == "secret", "IRODS server unavailable")
 
     # store small R object in iRODS
     dfr <- data.frame(a = c("a", "b", "c"), b = 1:3, c = 6:8)
@@ -29,14 +26,16 @@
 
     # remove object from iRODS
     expect_invisible(irm("foo.csv"))
-  })
-# },
-# simplify = FALSE
-# )
+    })
+},
+simplify = FALSE
+)
 
 test_that("overwrite error works", {
 
-  # overwrite error on irods
+  # no actual http call is made in these instances
+
+  # overwrite error on iRODS
   test <- "test"
   expect_error(
     iput(

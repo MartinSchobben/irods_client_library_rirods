@@ -9,8 +9,8 @@ with_mock_dir("add-data-collections", {
 
     # reference dataframe
     ref <- data.frame(
-      logical_path = paste0(lpath, "/", user, "/testthat", c("/a", "/x", "/test.rds")),
-      type = c("collection", "collection", "data_object")
+      logical_path = paste0(lpath, "/", user, "/testthat", c("/a", "/x")),
+      type = c("collection", "collection")
     )
 
     # check if collections are added
@@ -18,7 +18,7 @@ with_mock_dir("add-data-collections", {
 
     # remove dirs
     irm("a", recursive = TRUE, trash = FALSE)
-    icd("./x")
+    icd("x")
     irm("a", recursive = TRUE, trash = FALSE)
     icd("..")
     irm("x", recursive = TRUE, trash = FALSE)
@@ -38,14 +38,11 @@ with_mock_dir("remove-objects", {
     # delete object "foo.csv"
     expect_invisible(irm("foo.csv", trash = FALSE))
 
-    # reference dataframe
-    ref <- data.frame(
-      logical_path = paste0(lpath, "/", user, "/testthat/test.rds"),
-      type = "data_object"
-    )
-
     # check if file is delete
-    expect_equal(ils(), ref)
+    expect_message(
+      ils(),
+      "This collection does not contain any objects or collections."
+    )
 
     # r objects
     x <- 1

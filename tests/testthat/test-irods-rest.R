@@ -30,6 +30,7 @@ test_that("data switch works", {
     httr2::req_headers(Authorization = local(token, envir = .rirods)) |>
     httr2::req_method("PUT")
 
-  data_switch("csv", req, "foo.csv")
-  data_switch("", req, "foo.csv")
+  object <- charToRaw("object")
+  expect_equal(data_switch("object", req, object)$url, paste0(host,"/stream"))
+
 })
