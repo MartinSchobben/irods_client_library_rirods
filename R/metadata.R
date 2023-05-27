@@ -102,7 +102,7 @@ imeta <- function(
   # define entity type
   entity_type <- match.arg(entity_type)
 
-    # check for class `dataframe` and turn into list of lists
+  # check for class `dataframe` and turn into list of lists
   if (inherits(operations, "data.frame")) {
     operations <- apply(operations, 1, as.list)
   }
