@@ -161,6 +161,17 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span> <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># list of lists are useful as AVUs don't have to contain all items and, e.g,</span></span></span>
+<span class="r-in"><span><span class="co"># units can be left out</span></span></span>
+<span class="r-in"><span><span class="fu">imeta</span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="st">"foo.rds"</span>,</span></span>
+<span class="r-in"><span> <span class="st">"data_object"</span>,</span></span>
+<span class="r-in"><span> operations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo6"</span>, value <span class="op">=</span> <span class="st">"bar6"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo7"</span>, value <span class="op">=</span> <span class="st">"bar7"</span>, units <span class="op">=</span> <span class="st">"baz7"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># check if file is stored with associated metadata</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
