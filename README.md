@@ -45,7 +45,7 @@ http://localhost/irods-rest/0.9.3 (or later version).
 This Docker container designed to easily stand up a **DEMONSTRATION** of
 the iRODS server. It is intended for education and exploration.
 
-**DO NOT USE IN PRODUCTION**
+**DO NOT USE IN PRODUCTION!**
 
 ## Example Usage
 

@@ -57,7 +57,7 @@ unlink(list.files(pattern = ".irods$"))
 
 This will result in the demonstration REST API running at http://localhost/irods-rest/0.9.3 (or later version).
 
-This Docker container designed to easily stand up a **DEMONSTRATION** of the iRODS server.  It is intended for education and exploration.
+These Docker containers are designed to easily stand up a **DEMONSTRATION** of the iRODS server. It is intended for education and exploration.
 
 **DO NOT USE IN PRODUCTION!**
 
