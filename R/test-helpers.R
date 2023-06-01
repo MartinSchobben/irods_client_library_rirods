@@ -1,32 +1,22 @@
-use_irods_demo <- function(action = "up") {
-
-  # does it exist
-  pt <- system("find ~ -path ~/.local  -prune -o -type d -name 'irods_demo' -print", intern = TRUE)
-  if (length(pt) == 0)
-    warning("The iRODS demo is not installed on this system. Using http mock files instead.", call. = FALSE)
-
-  if (action == "up") {
-    system(paste0("cd ",pt ," ; docker-compose up -d nginx-reverse-proxy"))
-  } else if (action == "down") {
-    system(paste0("cd ",pt ," ; docker-compose down"))
-  } else {
-    stop("Action unkown.", call. = FALSE)
-  }
-}
-
-# remove httptest2 mock files
-remove_mock_files <- function() {
-  # find the mock dirs
-  pt <- file.path(getwd(), testthat::test_path())
-  fls <- list.files(pt, include.dirs = TRUE)
-  mockers <- fls[!grepl(pattern = "((.*)\\..*$)|(^_)",  x= fls)]
-  # remove mock dirs
-  unlink(file.path(pt, mockers), recursive = TRUE)
-  # remove .gitignore
-  unlink(file.path(pt, ".gitignore"))
-}
-
-# create local irods instance in temp dir
+#' Launch iRODS from alternative directory
+#'
+#' This function is useful during development as it prevents cluttering of the
+#' package source files.
+#'
+#' @param host Hostname of the iRODS server
+#'  (default: "http://localhost/irods-rest/0.9.3").
+#' @param zone_path Zone path of the iRODS server.
+#' @param dir The directory to use (default is temporary directory).
+#' @param env Attach exit handlers to this environment. Defaults to the
+#'  parent frame (accessed through parent.frame()).
+#'
+#' @return Invisibly returns the original directory.
+#'
+#' @examples
+#' if (interactive()) {
+#'   # launch iRODS from temporary directory
+#'   local_create_irods()
+#' }
 local_create_irods <- function(
     host = NULL,
     zone_path = NULL,
@@ -37,7 +27,8 @@ local_create_irods <- function(
   # default host
   if (is.null(host)) {
     if (Sys.getenv("DEV_KEY_IROD") != "") {
-      host <- httr2::secret_decrypt(Sys.getenv("DEV_HOST_IRODS"), "DEV_KEY_IRODS")
+      host <-
+        httr2::secret_decrypt(Sys.getenv("DEV_HOST_IRODS"), "DEV_KEY_IRODS")
     } else {
       host <- "http://localhost/irods-rest/0.9.3"
     }
@@ -46,7 +37,8 @@ local_create_irods <- function(
   # defaults path
   if (is.null(zone_path)) {
     if (Sys.getenv("DEV_KEY_IROD") != "") {
-      zone_path <- httr2::secret_decrypt(Sys.getenv("DEV_ZONE_PATH_IRODS"), "DEV_KEY_IRODS")
+      zone_path <-
+        httr2::secret_decrypt(Sys.getenv("DEV_ZONE_PATH_IRODS"), "DEV_KEY_IRODS")
     } else {
       zone_path <- "/tempZone/home"
     }
@@ -65,3 +57,16 @@ local_create_irods <- function(
   invisible(dir)
 }
 
+#' Remove http snapshots or mockfiles
+#'
+#' @return Invisibly the mock file paths.
+#'
+remove_mock_files <- function() {
+  # find the mock dirs
+  pt <- file.path(getwd(), testthat::test_path())
+  fls <- list.files(pt, include.dirs = TRUE)
+  mockers <- fls[!grepl(pattern = "((.*)\\..*$)|(^_)",  x= fls)]
+  # remove mock dirs
+  unlink(file.path(pt, mockers), recursive = TRUE)
+  invisible(file.path(pt, mockers))
+}
