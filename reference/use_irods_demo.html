@@ -63,7 +63,12 @@ stop the containers, and subsequently remove the images. Note that calling
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_irods_demo</span><span class="op">(</span>user <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>, pass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_irods_demo</span><span class="op">(</span></span>
+<span>  user <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  pass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  recreate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">stop_irods_demo</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -78,6 +83,12 @@ stop the containers, and subsequently remove the images. Note that calling
 
 <dt>pass</dt>
 <dd><p>Character vector for password (defaults to "rods" admin password)</p></dd>
+
+
+<dt>recreate</dt>
+<dd><p>Boolean to indicate whether to recreate (reboot) the iRODS
+demo server (defaults to <code>FALSE</code>). Recreating will destroy all content on
+the current instance.</p></dd>
 
 
 <dt>verbose</dt>
