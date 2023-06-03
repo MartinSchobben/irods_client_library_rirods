@@ -35,7 +35,7 @@ You can install the development version of rirods like so:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("irods/irods_client_library_rirods")
+devtools::install_github("irods/irods_client_library_rirods", build_opts = "--keep-empty-dirs")
 ```
 
 ## Prerequisites

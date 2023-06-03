@@ -18,7 +18,7 @@ You can install the development version of rirods like so:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("irods/irods_client_library_rirods")
+devtools::install_github("irods/irods_client_library_rirods", build_opts = "--keep-empty-dirs")
 ```
 
 ## Prerequisites
@@ -34,8 +34,15 @@ library(rirods)
 # setup a mock iRODS server (https://github.com/irods/irods_demo)
 use_irods_demo("alice", "passWORD")
 #> 
+#> There seems to be a problem with the iRODS demo server. 
+#> The problem might be solved by rebooting the server. 
+#> This action will destroy all content on the server!
+#> Can I reboot the server? (Yes/no/cancel)
+#> 
+#> This may take a while!
+#> 
 #> Do the following to connect with the iRODS demo server: 
-#> create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home") 
+#> create_irods("http://localhost/irods-rest/0.9.3", "tempZone/home") 
 #> iauth("alice", "passWORD")
 ```
 
@@ -104,20 +111,8 @@ imeta(
 
 # check if file is stored with associated metadata
 ils(metadata = TRUE)
-#> 
-#> ========
-#> metadata
-#> ========
-#> /tempZone/home/alice/foo.rds :
-#>  attribute value units
-#>        foo   bar   baz
-#> 
-#> 
-#> ==========
-#> iRODS Zone
-#> ==========
-#>                  logical_path        type
-#>  /tempZone/home/alice/foo.rds data_object
+#>                   logical_path      metadata        type
+#> 1 /tempZone/home/alice/foo.rds foo, bar, baz data_object
 ```
 
 ### read R objects
@@ -151,13 +146,9 @@ iput("foo.csv")
 
 # check whether it is stored
 ils()
-#> 
-#> ==========
-#> iRODS Zone
-#> ==========
-#>                  logical_path        type
-#>  /tempZone/home/alice/foo.csv data_object
-#>  /tempZone/home/alice/foo.rds data_object
+#>                   logical_path        type
+#> 1 /tempZone/home/alice/foo.csv data_object
+#> 2 /tempZone/home/alice/foo.rds data_object
 ```
 
 Later on somebody else might want to download this file again and store
