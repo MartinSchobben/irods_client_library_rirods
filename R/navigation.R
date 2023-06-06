@@ -188,7 +188,7 @@ ils <- function(
     check_type = FALSE,
     simplifyVector = TRUE
   )$`_embedded` |>
-  as.data.frame()
+  new_irods_df()
 
   # metadata reordering
   if (isTRUE(metadata)) {
@@ -196,13 +196,7 @@ ils <- function(
   }
 
   # output
-  if (nrow(out) == 0) {
-    if (isTRUE(message))
-      message("This collection does not contain any objects or collections.")
-    invisible(out)
-  } else {
-    out
-  }
+  out
 }
 
 # reorder metadata if it exists

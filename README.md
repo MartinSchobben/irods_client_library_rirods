@@ -111,8 +111,24 @@ imeta(
 
 # check if file is stored with associated metadata
 ils(metadata = TRUE)
-#>                   logical_path      metadata        type
-#> 1 /tempZone/home/alice/foo.rds foo, bar, baz data_object
+#> Called from: extract_df(x, "metadata")
+#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#43: extract <- df[[var]]
+#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#44: names(extract) <- df$logical_path
+#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#45: print_extract(extract, var, row.names = FALSE)
+#> 
+#> ========
+#> metadata
+#> ========
+#> /tempZone/home/alice/foo.rds :
+#>  attribute value units
+#>        foo   bar   baz
+#> 
+#> 
+#> ==========
+#> iRODS Zone
+#> ==========
+#>                  logical_path        type
+#>  /tempZone/home/alice/foo.rds data_object
 ```
 
 ### read R objects
@@ -146,9 +162,13 @@ iput("foo.csv")
 
 # check whether it is stored
 ils()
-#>                   logical_path        type
-#> 1 /tempZone/home/alice/foo.csv data_object
-#> 2 /tempZone/home/alice/foo.rds data_object
+#> 
+#> ==========
+#> iRODS Zone
+#> ==========
+#>                  logical_path        type
+#>  /tempZone/home/alice/foo.csv data_object
+#>  /tempZone/home/alice/foo.rds data_object
 ```
 
 Later on somebody else might want to download this file again and store
