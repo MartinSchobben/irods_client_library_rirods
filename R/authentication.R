@@ -20,6 +20,9 @@
 #' }
 iauth <- function(user = NULL, password = NULL, role = "rodsuser") {
 
+  # check connection
+  if (!is_connected_irods()) stop("Not connected to iRODS.", call. = FALSE)
+
   # ask for credentials
   if (is.null(user)) {
     user <- askpass::askpass("Please enter your username:")

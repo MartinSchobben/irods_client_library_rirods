@@ -34,13 +34,6 @@ library(rirods)
 # setup a mock iRODS server (https://github.com/irods/irods_demo)
 use_irods_demo("alice", "passWORD")
 #> 
-#> There seems to be a problem with the iRODS demo server. 
-#> The problem might be solved by rebooting the server. 
-#> This action will destroy all content on the server!
-#> Can I reboot the server? (Yes/no/cancel)
-#> 
-#> This may take a while!
-#> 
 #> Do the following to connect with the iRODS demo server: 
 #> create_irods("http://localhost/irods-rest/0.9.3", "tempZone/home") 
 #> iauth("alice", "passWORD")
@@ -111,10 +104,6 @@ imeta(
 
 # check if file is stored with associated metadata
 ils(metadata = TRUE)
-#> Called from: extract_df(x, "metadata")
-#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#43: extract <- df[[var]]
-#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#44: names(extract) <- df$logical_path
-#> debug at /shares/mschobbe/home/products/irods_client_library_rirods/R/irods-print.R#45: print_extract(extract, var, row.names = FALSE)
 #> 
 #> ========
 #> metadata

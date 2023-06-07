@@ -8,12 +8,13 @@
 #'
 #' @examples
 print.irods_df <- function (x, ...) {
-    n <- length(row.names(x))
+
     if (length(x) == 0L) {
       cat("This collection does not contain any objects or collections.")
     } else {
-      extract_df(x, "metadata")
-      extract_df(x, "permission_information")
+      df <- extract_df(x, "metadata")
+      df <- extract_df(df, "status_information")
+      df <- extract_df(df, "permission_information")
       cat(paste0(
         "\n",
         strrep("=", 10),
@@ -23,26 +24,24 @@ print.irods_df <- function (x, ...) {
         strrep("=", 10),
         "\n"
       ))
-      df <- data.frame(
-        logical_path = x$logical_path,
-        type = x$type
-      )
-      if (!is.null(x$status_information)) {
-        df$last_write_time <- x$status_information$last_write_time
-        df$size <- x$status_information$size
-      }
-      print(df,row.names = FALSE)
+      print(as.data.frame(df), row.names = FALSE)
       x
     }
     invisible(x)
 }
 
 extract_df <- function(df, var) {
-  if (!is.null(df[[var]])) {
-    extract <- df[[var]]
-    names(extract) <- df$logical_path
-    print_extract(extract, var, row.names = FALSE)
+  if (!is.null(extract <- df[[var]] )) {
+    remainder <- df[names(df) != var]
+    if (class(extract) == "data.frame") {
+      df <- cbind(remainder, extract)
+    } else if (class(extract) == "list") {
+      names(extract) <- df$logical_path
+      print_extract(extract, var, row.names = FALSE)
+      df <- remainder
+    }
   }
+  df
 }
 
 print_extract <- function(x, var, ...) {

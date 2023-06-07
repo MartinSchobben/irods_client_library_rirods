@@ -49,6 +49,11 @@ validate_irods_df <- function(x) {
   x
 }
 
+as.data.frame.irods_df <- function(x, ...) {
+  class(x) <- "data.frame"
+  x
+}
+
 is_nested_dataframe <- function(x) {
   vapply(x, function(x) is.data.frame(x) | length(x) == 0, logical(1))
 }
