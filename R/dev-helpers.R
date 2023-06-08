@@ -11,11 +11,15 @@
 #'  parent frame (accessed through parent.frame()).
 #'
 #' @return Invisibly returns the original directory.
+#' @keywords internal
 #'
 #' @examples
-#' if (interactive()) {
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
+#'
+#' if (!inherits(irods_demo, "try-error")) {
 #'   # launch iRODS from temporary directory
-#'   local_create_irods()
+#'   rirods:::local_create_irods()
 #' }
 local_create_irods <- function(
     host = NULL,
@@ -58,7 +62,7 @@ local_create_irods <- function(
 }
 
 #' Remove http snapshots or mockfiles
-#'
+#' @keywords internal
 #' @return Invisibly the mock file paths.
 #'
 remove_mock_files <- function() {
@@ -70,3 +74,4 @@ remove_mock_files <- function() {
   unlink(file.path(pt, mockers), recursive = TRUE)
   invisible(file.path(pt, mockers))
 }
+

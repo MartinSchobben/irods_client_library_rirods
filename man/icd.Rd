@@ -22,27 +22,42 @@ respectively. For example, whereas \code{getwd()} returns the current working di
 in the local system, \code{ipwd()} returns the current working directory in iRODS.
 }
 \examples{
-if(interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authenticate
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-# default dir
-icd(".")
-ipwd()
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
 
-# relative paths work as well
-icd("/tempZone/home")
-ipwd()
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home",
+    overwrite = TRUE)
 
-# go back on level lower
-icd("..")
-ipwd()
+  # authenticate
+  iauth("rods", "rods")
 
-# absolute paths work as well
-icd("/tempZone/home/rods")
-ipwd()
+  # default dir
+  icd(".")
+  ipwd()
+
+  # relative paths work as well
+  icd("/tempZone/home")
+  ipwd()
+
+  # go back on level lower
+  icd("..")
+  ipwd()
+
+  # absolute paths work as well
+  icd("/tempZone/home/rods")
+  ipwd()
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }

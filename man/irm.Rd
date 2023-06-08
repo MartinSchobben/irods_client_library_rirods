@@ -27,24 +27,40 @@ Invisibly the HTTP call.
 This is the equivalent of \code{file.remove()}, but applied to an item inside iRODS.
 }
 \examples{
-if (interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authentication
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-# some data
-foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
 
-# store
-iput(foo, "foo.rds")
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
 
-# check if file is stored
-ils()
+  # authenticate
+  iauth("rods", "rods")
 
-# delete object
-irm("foo.rds", force = TRUE)
-iquery("SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo\%'")
+  # some data
+  foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+
+  # store
+  isaveRDS(foo, "foo.rds")
+
+  # check if file is stored
+  ils()
+
+  # delete object
+  irm("foo.rds", force = TRUE)
+
+  # check if file is deleted
+  ils()
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }

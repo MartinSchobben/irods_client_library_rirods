@@ -1,8 +1,80 @@
-new_irods_df <- function(x = data.frame()) {
+#' Coerce to a Data Frame
+#'
+#' Coerce iRODS Zone information class to `data.frame()`. Note that possible
+#' columns of metadata consists of a list of data frames, and status_information
+#' and permission_information consist of data frames.
+#'
+#' @param x `irods_df` class object.
+#' @param ... Currently not implemented
+#'
+#' @return Returns a `data.frame`
+#' @export
+#' @keywords internal
+#'
+#' @examples
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
+#'
+#' if (!inherits(irods_demo, "try-error")) {
+#'
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
+#'
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
+#'
+#'   # authenticate
+#'   iauth("rods", "rods")
+#'
+#'   # some data
+#'   foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+#'
+#'   # store data in iRODS
+#'   isaveRDS(foo, "foo.rds")
+#'
+#'   # add some metadata
+#'
+#'   imeta(
+#'     "foo.rds",
+#'     "data_object",
+#'     operations =
+#'       data.frame(operation = "add", attribute = "foo", value = "bar",
+#'         units = "baz")
+#'    )
+#'
+#'   # iRODS Zone with metadata
+#'   irods_zone <- ils(metadata = TRUE)
+#'
+#'   # check class
+#'   class(irods_zone)
+#'
+#'   # coerce into `data.frame` and extract metadata of "foo.rds"
+#'   irods_zone <- as.data.frame(irods_zone)
+#'   irods_zone[basename(irods_zone$logical_path) == "foo.rds", "metadata"]
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
+#' }
+as.data.frame.irods_df <- function(x, ...) {
+  class(x) <- "data.frame"
+  x
+}
+#' iRODS Zone information class
+#'
+#' @keywords internal
+#' @param x list with iRODS Zone information.
+#'
+#' @return `irods_df` class object.
+new_irods_df <- function(x = list()) {
   validate_irods_df(x)
   structure(x, class = "irods_df")
 }
 
+# helpers to validate the `irods_df` class
 validate_irods_df <- function(x) {
 
   if (!is.list(x))
@@ -46,11 +118,6 @@ validate_irods_df <- function(x) {
       stop("Column names of `metadata` are unknown iRODS attributes.",
            call. = FALSE)
   }
-  x
-}
-
-as.data.frame.irods_df <- function(x, ...) {
-  class(x) <- "data.frame"
   x
 }
 

@@ -35,7 +35,7 @@ library(rirods)
 use_irods_demo("alice", "passWORD")
 #> 
 #> Do the following to connect with the iRODS demo server: 
-#> create_irods("http://localhost/irods-rest/0.9.3", "tempZone/home") 
+#> create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home") 
 #> iauth("alice", "passWORD")
 ```
 

@@ -13,10 +13,8 @@
 #' @export
 #'
 #' @examples
-#' if(interactive()) {
-#' # connect project to server
-#' create_irods("http://localhost/irods-rest/0.9.2", "/tempZone/home")
-#' }
+#' # add connection server information to *.irods project file
+#' create_irods("http://localhost/irods-rest/0.9.2", "/tempZone/home", tempdir())
 create_irods <- function(
     host,
     zone_path,

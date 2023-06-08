@@ -22,7 +22,7 @@ test_that("compare shell with R solution", {
   R <- ils(logical_path = lpath)
 
   # compare list output
-  expect_equal(R, shell$`_embedded`)
+  expect_equal(R, rirods:::new_irods_df(shell$`_embedded`))
 
   # remove user bobby
   iadmin(action = "remove", target = "user", arg2 = "bobby")

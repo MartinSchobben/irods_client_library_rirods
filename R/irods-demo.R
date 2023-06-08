@@ -24,19 +24,16 @@
 #'
 #' @examples
 #'
-#' if (interactive()) {
+#' # launch docker irods_demo containers (and possibly download images) with
+#' # default credentials.
+#' irods_demo <- try(use_irods_demo())
 #'
-#'   # launch docker irods_demo containers (and possibly download images) with
-#'   # default credentials.
-#'   use_irods_demo()
+#' # same but then with "alice" as user and "PASSword" as password
+#' irods_demo <- try(use_irods_demo("alice", "PASSword"))
 #'
-#'   # same but then with "alice" as user and "PASSword" as password
-#'   use_irods_demo("alice", "PASSword")
-#'
-#'   # stop containers
+#' # stop containers
+#' if(!inherits(irods_demo, "try-error"))
 #'   stop_irods_demo()
-#' }
-#'
 use_irods_demo <- function(user = character(), pass = character(),
                            recreate = FALSE, verbose = TRUE) {
 
@@ -99,7 +96,7 @@ use_irods_demo <- function(user = character(), pass = character(),
     message(
       "\n",
       "Do the following to connect with the iRODS demo server: \n",
-      "create_irods(\"http://localhost/irods-rest/0.9.3\", \"tempZone/home\") \n",
+      "create_irods(\"http://localhost/irods-rest/0.9.3\", \"/tempZone/home\") \n",
       "iauth(\"", user, "\", \"", pass, "\")"
     )
   }
@@ -113,8 +110,10 @@ stop_irods_demo <- function() {
   system(paste0("cd ", path_to_demo(), " ; docker-compose down"))
   invisible()
 }
-#' @rdname use_irods_demo
-#'
+
+#' Remove Docker images from system
+#' @keywords internal
+#' @return Invisible
 remove_docker_images <- function() {
   system("docker compose down", intern = TRUE)
   system("docker system prune --force", intern = TRUE)
@@ -165,7 +164,10 @@ dry_run_irods <- function(user, pass, recreate) {
   )
 }
 
-# check if containers are running
+#' Predicate check for iRODS demo server state
+#' @keywords internal
+#' @return boolean, TRUE if running, FALSE if stopped.
+#'
 is_irods_demo_running <- function() {
   irods_container_ref <- paste0(irods_images_ref, "_1")
   cmd <- paste0(

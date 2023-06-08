@@ -12,11 +12,26 @@
 #' @export
 #'
 #' @examples
-#' if(interactive()) {
-#' # connect project to server
-#' create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
-#' # authenticate
-#' iauth()
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
+#'
+#' if (!inherits(irods_demo, "try-error")) {
+#'
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
+#'
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
+#'
+#'   # authenticate
+#'   iauth("rods", "rods")
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
 #' }
 iauth <- function(user = NULL, password = NULL, role = "rodsuser") {
 

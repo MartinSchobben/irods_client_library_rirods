@@ -45,20 +45,38 @@ List the contents of a collection, optionally with stat, metadata, and/or
 access control information for each element in the collection.
 }
 \examples{
-if(interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authenticate
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-# list home directory
-ils()
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
 
-# list a different directory
-ils('/tempZone/home/rods/some_collection')
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home",
+    overwrite = TRUE)
 
-# show metadata
-ils(metadata = TRUE)
+  # authenticate
+  iauth("rods", "rods")
+
+  # list home directory
+  ils()
+
+  # make collection
+  imkdir("some_collection")
+
+  # list a different directory
+  ils("/tempZone/home/rods/some_collection")
+
+  # show metadata
+  ils(metadata = TRUE)
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }

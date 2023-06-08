@@ -24,8 +24,6 @@ iRODS server. Once the file has been created, future sessions
 connect again with the same iRODS server without further intervention.
 }
 \examples{
-if(interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.2", "/tempZone/home")
-}
+# add connection server information to *.irods project file
+create_irods("http://localhost/irods-rest/0.9.2", "/tempZone/home", tempdir())
 }

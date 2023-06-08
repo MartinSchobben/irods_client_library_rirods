@@ -22,24 +22,38 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
-#' # connect project to server
-#' create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", TRUE)
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
 #'
-#' # authenticate
-#' iauth()
+#' if (!inherits(irods_demo, "try-error")) {
 #'
-#' # save the iris dataset as csv and send the file to iRODS
-#' library(readr)
-#' write_csv(iris, "iris.csv")
-#' iput("iris.csv", overwrite = TRUE)
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
 #'
-#' # save with a different name
-#' iput("iris.csv", "irids_in_irods.csv", overwrite = TRUE)
-#' ils()
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
 #'
-#' # send an R object to iRODS in RDS format
-#' isaveRDS(iris, "irids_in_rds.rds", overwrite = TRUE)
+#'   # authenticate
+#'   iauth("rods", "rods")
+#'
+#'   # save the iris dataset as csv and send the file to iRODS
+#'   library(readr)
+#'   write_csv(iris, "iris.csv")
+#'   iput("iris.csv", overwrite = TRUE)
+#'
+#'   # save with a different name
+#'   iput("iris.csv", "irids_in_irods.csv", overwrite = TRUE)
+#'   ils()
+#'
+#'   # send an R object to iRODS in RDS format
+#'   isaveRDS(iris, "irids_in_rds.rds", overwrite = TRUE)
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
 #' }
 iput <- function(
     local_path,
@@ -226,27 +240,42 @@ local_to_irods_ <- function(
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
-#' create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", TRUE)
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
 #'
-#' # authenticate
-#' iauth()
+#' if (!inherits(irods_demo, "try-error")) {
 #'
-#' # save the iris dataset as csv and send the file to iRODS
-#' library(readr)
-#' write_csv(iris, "iris.csv")
-#' iput("iris.csv", overwrite = TRUE)
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
 #'
-#' # bring the file back with a different name
-#' iget("iris.csv", "new_iris.csv", overwrite = TRUE)
-#' files.exists("new_iris.csv") # check that it has been transferred
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
 #'
-#' # send an R object to iRODS in RDS format
-#' isaveRDS(iris, "irids_in_rds.rds")
+#'   # authenticate
+#'   iauth("rods", "rods")
 #'
-#' # read it back
-#' iris_again <- ireadRDS("irids_in_rds.rds")
-#' iris_again
+#'   # save the iris dataset as csv and send the file to iRODS
+#'   library(readr)
+#'   write_csv(iris, "iris.csv")
+#'   iput("iris.csv", overwrite = TRUE)
+#'
+#'   # bring the file back with a different name
+#'   iget("iris.csv", "new_iris.csv", overwrite = TRUE)
+#'   file.exists("new_iris.csv") # check that it has been transferred
+#'
+#'   # send an R object to iRODS in RDS format
+#'   isaveRDS(iris, "irids_in_rds.rds")
+#'
+#'   # read it back
+#'   iris_again <- ireadRDS("irids_in_rds.rds")
+#'   iris_again
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
 #' }
 iget <- function(
     logical_path,

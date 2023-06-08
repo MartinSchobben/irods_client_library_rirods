@@ -16,25 +16,41 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
-#' # connect project to server
-#' create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
 #'
-#' # authentication
-#' iauth()
+#' if (!inherits(irods_demo, "try-error")) {
 #'
-#' # some data
-#' foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
 #'
-#' # store
-#' iput(foo, "foo.rds")
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
 #'
-#' # check if file is stored
-#' ils()
+#'   # authenticate
+#'   iauth("rods", "rods")
 #'
-#' # delete object
-#' irm("foo.rds", force = TRUE)
-#' iquery("SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'")
+#'   # some data
+#'   foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+#'
+#'   # store
+#'   isaveRDS(foo, "foo.rds")
+#'
+#'   # check if file is stored
+#'   ils()
+#'
+#'   # delete object
+#'   irm("foo.rds", force = TRUE)
+#'
+#'   # check if file is deleted
+#'   ils()
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
 #' }
 irm <- function(logical_path, force = TRUE, recursive = FALSE,
                 verbose = FALSE) {
@@ -63,7 +79,6 @@ irm <- function(logical_path, force = TRUE, recursive = FALSE,
 #'
 #' @param logical_path Path to the collection to create, relative to the current
 #'   working directory (see `ipwd()`).
-#' @param collection Whether a collection is being created. Defaults to `TRUE`.
 #' @param create_parent_collections Whether parent collections should be created
 #'   when necessary. Defaults to `FALSE`.
 #' @param verbose Whether information about the HTTP request and response
@@ -73,31 +88,51 @@ irm <- function(logical_path, force = TRUE, recursive = FALSE,
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
-#' # connect project to server
-#' create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+#' # demonstration server (requires Bash, Docker and Docker-compose)
+#' irods_demo <- try(use_irods_demo())
 #'
-#' # authentication
-#' iauth()
+#' if (!inherits(irods_demo, "try-error")) {
 #'
-#' ils()
-#' imkdir("new_collection")
-#' ils()
-#' icd("new_collection")
+#'   # move to temporary directory and save old working directory
+#'   old_dir <- getwd()
+#'   tmp <- tempdir()
+#'   setwd(tmp)
+#'
+#'   # connect project to server
+#'   create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
+#'
+#'   # authentication
+#'   iauth("rods", "rods")
+#'
+#'   # list all object and collection in the current collection of iRODS
+#'   ils()
+#'
+#'   # create a new collection
+#'   imkdir("new_collection")
+#'
+#'   # check if it is there
+#'   ils()
+#'
+#'   # and move to the new directory
+#'   icd("new_collection")
+#'
+#'   stop_irods_demo()
+#'
+#'   # back to previous directory
+#'   setwd(old_dir)
 #' }
-imkdir <- function(logical_path, collection = TRUE,
-                   create_parent_collections = FALSE, verbose = FALSE) {
-  # NOTE this function will be made into an internal function create_item()
-  # Then `imkdir()` will call this function with collection = TRUE
-  # and `itouch()` will call this function with collection = FALSE and create_parent_collections = FALSE
+imkdir <- function(logical_path, create_parent_collections = FALSE, verbose = FALSE) {
 
   # expand logical path to absolute logical path
   logical_path <- get_absolute_lpath(logical_path)
 
   # flags to curl call
+  # `imkdir()` will call this API end-point with collection is 1 to create new
+  # collection, 0 does have no affect currently
+  # https://github.com/irods/irods_client_rest_cpp/issues/185
   args <- list(
     `logical-path` = logical_path,
-    collection = as.integer(collection),
+    collection = 1,
     `create-parent-collections` = as.integer(create_parent_collections)
   )
 

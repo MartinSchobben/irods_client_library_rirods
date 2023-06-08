@@ -2,3 +2,4 @@
 docs
 inst/doc
 dev/dev_history.R
+*.irods

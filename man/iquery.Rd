@@ -41,16 +41,31 @@ different properties. Read more about queries by looking at the iCommands
 equivalent \code{iquest} in the \href{https://docs.irods.org/master/icommands/user/#iquest}{iRODS Docs}.
 }
 \examples{
-if(interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authentication
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-# search for objects by metadata
-iquery("SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/\%'")
-iquery("SELECT COLL_NAME, DATA_NAME WHERE META_DATA_ATTR_NAME LIKE 'foo\%'")
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
+
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home",
+    overwrite = TRUE)
+
+  # authentication
+  iauth("rods", "rods")
+
+  # search for objects by metadata
+  iquery("SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/\%'")
+  iquery("SELECT COLL_NAME, DATA_NAME WHERE META_DATA_ATTR_NAME LIKE 'foo\%'")
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }
 \references{

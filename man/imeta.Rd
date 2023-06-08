@@ -41,67 +41,81 @@ specific AVUs. Read more about metadata by looking at the iCommands
 equivalent \code{imeta} in the \href{https://docs.irods.org/master/icommands/metadata/}{iRODS Docs}.
 }
 \examples{
-if(interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authentication
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-# some data
-foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
 
-# store
-isaveRDS(foo, "foo.rds")
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home",
+    overwrite = TRUE)
 
-# check if file is stored
-ils()
+  # authentication
+  iauth("rods", "rods")
 
-# add some metadata
-imeta(
- "foo.rds",
- "data_object",
- operations =
-  list(
-   list(operation = "add", attribute = "foo", value = "bar", units = "baz")
- )
-)
+  # some data
+  foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
 
-# `operations` can contain multiple tags supplied as a `data.frame`
-imeta(
+  # store
+  isaveRDS(foo, "foo.rds")
+
+  # check if file is stored
+  ils()
+
+  # add some metadata
+  imeta(
+    "foo.rds",
+    "data_object",
+    operations =
+      list(
+        list(operation = "add", attribute = "foo", value = "bar", units = "baz")
+      )
+  )
+
+  # `operations` can contain multiple tags supplied as a `data.frame`
+  imeta(
+    "foo.rds",
+    "data_object",
+    operations = data.frame(
+      operation = c("add", "add"),
+      attribute = c("foo2", "foo3"),
+      value = c("bar2", "bar3"),
+      units = c("baz2", "baz3")
+    )
+  )
+
+  # or again as a list of lists
+  imeta(
   "foo.rds",
   "data_object",
-  operations = data.frame(
-    operation = c("add", "add"),
-    attribute = c("foo2", "foo3"),
-    value = c("bar2", "bar3"),
-    units = c("baz2", "baz3")
- )
-)
+  operations = list(
+    list(operation = "add", attribute = "foo4", value = "bar4", units = "baz4"),
+    list(operation = "add", attribute = "foo5", value = "bar5", units = "baz5")
+   )
+  )
 
-# or again as a list of lists
-imeta(
- "foo.rds",
- "data_object",
- operations = list(
-   list(operation = "add", attribute = "foo4", value = "bar4", units = "baz4"),
-   list(operation = "add", attribute = "foo5", value = "bar5", units = "baz5")
- )
-)
+  # list of lists are useful as AVUs don't have to contain units
+  imeta(
+    "foo.rds",
+    "data_object",
+    operations = list(
+      list(operation = "add", attribute = "foo6", value = "bar6"),
+      list(operation = "add", attribute = "foo7", value = "bar7", units = "baz7")
+    )
+   )
 
-# list of lists are useful as AVUs don't have to contain all items and, e.g,
-# units can be left out
-imeta(
- "foo.rds",
- "data_object",
- operations = list(
-   list(operation = "add", attribute = "foo6", value = "bar6"),
-   list(operation = "add", attribute = "foo7", value = "bar7", units = "baz7")
- )
-)
+  # check if file is stored with associated metadata
+  ils(metadata = TRUE)
 
-# check if file is stored with associated metadata
-ils(metadata = TRUE)
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }
 \references{

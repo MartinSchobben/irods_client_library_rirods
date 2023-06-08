@@ -3,7 +3,6 @@
 \name{use_irods_demo}
 \alias{use_irods_demo}
 \alias{stop_irods_demo}
-\alias{remove_docker_images}
 \title{Run Docker iRODS demonstration service}
 \usage{
 use_irods_demo(
@@ -14,8 +13,6 @@ use_irods_demo(
 )
 
 stop_irods_demo()
-
-remove_docker_images()
 }
 \arguments{
 \item{user}{Character vector for user name (defaults to "rods" admin)}
@@ -47,19 +44,16 @@ These functions are untested on Windows and macOS and require:
 }
 \examples{
 
-if (interactive()) {
+# launch docker irods_demo containers (and possibly download images) with
+# default credentials.
+irods_demo <- try(use_irods_demo())
 
-  # launch docker irods_demo containers (and possibly download images) with
-  # default credentials.
-  use_irods_demo()
+# same but then with "alice" as user and "PASSword" as password
+irods_demo <- try(use_irods_demo("alice", "PASSword"))
 
-  # same but then with "alice" as user and "PASSword" as password
-  use_irods_demo("alice", "PASSword")
-
-  # stop containers
+# stop containers
+if(!inherits(irods_demo, "try-error"))
   stop_irods_demo()
-}
-
 }
 \references{
 https://github.com/irods/irods_demo

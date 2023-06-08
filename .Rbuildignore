@@ -16,4 +16,3 @@
 ^pkgdown$
 ^\.github$
 ^\.covrignore$
-[.]js$

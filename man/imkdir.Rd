@@ -4,18 +4,11 @@
 \alias{imkdir}
 \title{Create a new collection in iRODS}
 \usage{
-imkdir(
-  logical_path,
-  collection = TRUE,
-  create_parent_collections = FALSE,
-  verbose = FALSE
-)
+imkdir(logical_path, create_parent_collections = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{logical_path}{Path to the collection to create, relative to the current
 working directory (see \code{ipwd()}).}
-
-\item{collection}{Whether a collection is being created. Defaults to \code{TRUE}.}
 
 \item{create_parent_collections}{Whether parent collections should be created
 when necessary. Defaults to \code{FALSE}.}
@@ -31,16 +24,37 @@ This is the equivalent to \code{dir.create()}, but creating a collection in iROD
 instead of a local directory.
 }
 \examples{
-if (interactive()) {
-# connect project to server
-create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
 
-# authentication
-iauth()
+if (!inherits(irods_demo, "try-error")) {
 
-ils()
-imkdir("new_collection")
-ils()
-icd("new_collection")
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
+
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
+
+  # authentication
+  iauth("rods", "rods")
+
+  # list all object and collection in the current collection of iRODS
+  ils()
+
+  # create a new collection
+  imkdir("new_collection")
+
+  # check if it is there
+  ils()
+
+  # and move to the new directory
+  icd("new_collection")
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
 }
 }

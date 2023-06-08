@@ -2,15 +2,90 @@
 % Please edit documentation in R/irods-print.R
 \name{print.irods_df}
 \alias{print.irods_df}
-\title{Print method for iRODS dataframe class}
+\title{Print method for iRODS dataframe class.}
 \usage{
-\method{print}{irods_df}(x, ...)
+\method{print}{irods_df}(
+  x,
+  ...,
+  digits = NULL,
+  quote = FALSE,
+  right = TRUE,
+  row.names = FALSE,
+  max = NULL
+)
 }
 \arguments{
 \item{x}{An object of class \code{irods_df}.}
 
-\item{...}{Currently not implemented}
+\item{...}{optional arguments to \code{print} methods.}
+
+\item{digits}{the minimum number of significant digits to be used: see
+    \code{\link[base]{print.default}}.}
+
+\item{quote}{logical, indicating whether or not entries should be
+    printed with surrounding quotes.}
+
+\item{right}{logical, indicating whether or not strings should be
+    right-aligned.  The default is right-alignment.}
+
+\item{row.names}{logical (or character vector), indicating whether (or
+    what) row names should be printed.}
+
+\item{max}{numeric or \code{NULL}, specifying the maximal number of
+    entries to be printed.  By default, when \code{NULL},
+    \code{\link[base]{getOption}("max.print")} used.}
+}
+\value{
+Invisibly return the class \code{irods_df} object.
 }
 \description{
-Print method for iRODS dataframe class
+Print method for iRODS dataframe class.
+}
+\examples{
+# demonstration server (requires Bash, Docker and Docker-compose)
+irods_demo <- try(use_irods_demo())
+
+if (!inherits(irods_demo, "try-error")) {
+
+  # move to temporary directory and save old working directory
+  old_dir <- getwd()
+  tmp <- tempdir()
+  setwd(tmp)
+
+  # connect project to server
+  create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home", overwrite = TRUE)
+
+  # authenticate
+  iauth("rods", "rods")
+
+  # some data
+  foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
+
+  # store data in iRODS
+  isaveRDS(foo, "foo.rds")
+
+  # add some metadata
+
+  imeta(
+    "foo.rds",
+    "data_object",
+    operations =
+      data.frame(operation = "add", attribute = "foo", value = "bar",
+        units = "baz")
+  )
+
+  # iRODS Zone with metadata
+  irods_zone <- ils(metadata = TRUE)
+
+  # print (default no row.names)
+  print(irods_zone)
+
+  # with row.names
+  print(irods_zone, row.names = TRUE)
+
+  stop_irods_demo()
+
+  # back to previous directory
+  setwd(old_dir)
+}
 }
