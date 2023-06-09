@@ -8,7 +8,7 @@
 #' @param zone_path Zone path of the iRODS server.
 #' @param dir The directory to use (default is temporary directory).
 #' @param env Attach exit handlers to this environment. Defaults to the
-#'  parent frame (accessed through parent.frame()).
+#'  parent frame (accessed through `parent.frame()`).
 #'
 #' @return Invisibly returns the original directory.
 #' @keywords internal

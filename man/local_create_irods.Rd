@@ -20,7 +20,7 @@ local_create_irods(
 \item{dir}{The directory to use (default is temporary directory).}
 
 \item{env}{Attach exit handlers to this environment. Defaults to the
-parent frame (accessed through parent.frame()).}
+parent frame (accessed through \code{parent.frame()}).}
 }
 \value{
 Invisibly returns the original directory.
