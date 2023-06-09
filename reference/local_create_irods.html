@@ -46,7 +46,7 @@ package source files."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Launch iRODS from alternative directory</h1>
-      <small class="dont-index">Source: <a href="https://github.com/irods/irods_client_library_rirods/blob/HEAD/R/dev-helpers.R" class="external-link"><code>R/dev-helpers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/irods/irods_client_library_rirods/blob/HEAD/R/create-irods.R" class="external-link"><code>R/create-irods.R</code></a></small>
       <div class="d-none name"><code>local_create_irods.Rd</code></div>
     </div>
 
@@ -94,16 +94,14 @@ parent frame (accessed through <code><a href="https://rdrr.io/r/base/sys.parent.
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
-<span class="r-in"><span><span class="va">irods_demo</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="use_irods_demo.html">use_irods_demo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The iRODS demo Docker containers are not build on this system. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Would you like it to be build? (yes/No/cancel) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : The iRODS server could not be started!</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
+<span class="r-in"><span>  <span class="va">irods_demo</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="use_irods_demo.html">use_irods_demo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">irods_demo</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># launch iRODS from temporary directory</span></span></span>
-<span class="r-in"><span>  <span class="fu">rirods</span><span class="fu">:::</span><span class="fu">local_create_irods</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">local_create_irods</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
