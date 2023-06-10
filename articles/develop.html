@@ -98,12 +98,7 @@ and setups covered by these packages.</p>
 <code>httptest2</code> which enables testing of the logic on the R side
 of the API without requiring access to the remote service. It does this
 by recording the API response as mock files. These mock files are stored
-in several directories under <code>.tests/testthat/</code>. To enable
-testing against the real API one needs to remove these mock files. The
-helper <code>rirods:::remove_mock_files()</code> simplifies this task.
-This function is not exported and needs to be called with triple colons
-<code>:::</code> or sourced (e.g., using
-<code><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">devtools::load_all()</a></code>) and subsequently called.</p>
+in several directories under <code>.tests/testthat/</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="prerequisites-irods">Prerequisites iRODS<a class="anchor" aria-label="anchor" href="#prerequisites-irods"></a>
@@ -130,15 +125,14 @@ docker-compose plugin are installed.</p>
 further configuration in R is needed for development (except for
 removing possible mock files). For example, to run the unit tests
 against this local server use: <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code>.</p>
-<p>For miscellaneous development tasks one can, furthermore, use the
-non-exported function: <code>rirods:::local_create_irods()</code>. This
-test fixture is almost the same as the exported function
-<code><a href="../reference/create_irods.html">create_irods()</a></code> except that it uses an alternative directory
-(default to a temporary directory) as the working directory thereby
-preventing cluttering of the package source files. The working directory
-can be restored to the package directory by restarting the R session
-(possibly with <code>CTRL + SHIFT + F10</code>) or by running
-<code><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">withr::deferred_run()</a></code>.</p>
+<p>For miscellaneous development tasks one can, furthermore, use:
+<code><a href="../reference/local_create_irods.html">local_create_irods()</a></code>. This test fixture is almost the same
+as the exported function <code><a href="../reference/create_irods.html">create_irods()</a></code> except that it uses
+an alternative directory (default to a temporary directory) as the
+working directory thereby preventing cluttering of the package source
+files. The working directory can be restored to the package directory by
+restarting the R session (possibly with <code>CTRL + SHIFT + F10</code>)
+or by running <code><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">withr::deferred_run()</a></code>.</p>
 </div>
 <div class="section level3">
 <h3 id="remote-server">Remote server<a class="anchor" aria-label="anchor" href="#remote-server"></a>

@@ -86,42 +86,43 @@ in the local system, <code>ipwd()</code> returns the current working directory i
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
-<span class="r-in"><span>  <span class="va">irods_demo</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="use_irods_demo.html">use_irods_demo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="is_irods_demo_running.html">is_irods_demo_running</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">irods_demo</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
+<span class="r-in"><span><span class="co"># use_irods_demo()</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># connect project to server</span></span></span>
-<span class="r-in"><span>  <span class="co"># use `create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")`</span></span></span>
-<span class="r-in"><span>  <span class="co"># in production</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="local_create_irods.html">local_create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># connect project to server</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># authenticate</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># authenticate</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># default dir</span></span></span>
-<span class="r-in"><span>  <span class="fu">icd</span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># default dir</span></span></span>
+<span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home/rods"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># relative paths work as well</span></span></span>
-<span class="r-in"><span>  <span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># relative paths work as well</span></span></span>
+<span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># go back on level lower</span></span></span>
-<span class="r-in"><span>  <span class="fu">icd</span><span class="op">(</span><span class="st">".."</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># go back on level lower</span></span></span>
+<span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">".."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># absolute paths work as well</span></span></span>
-<span class="r-in"><span>  <span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home/rods"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># absolute paths work as well</span></span></span>
+<span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home/rods"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home/rods"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="use_irods_demo.html">stop_irods_demo</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># back home</span></span></span>
+<span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># back to working directory</span></span></span>
-<span class="r-in"><span>  <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">deferred_run</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># remove iRODS project file</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">".irods"</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -79,52 +79,53 @@ and permission_information consist of data frames.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
-<span class="r-in"><span>  <span class="va">irods_demo</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="use_irods_demo.html">use_irods_demo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="is_irods_demo_running.html">is_irods_demo_running</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">irods_demo</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
+<span class="r-in"><span><span class="co"># use_irods_demo()</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># connect project to server</span></span></span>
-<span class="r-in"><span>  <span class="co"># use `create_irods("http://localhost/irods-rest/0.9.3", "/tempZone/home")`</span></span></span>
-<span class="r-in"><span>  <span class="co"># in production</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="local_create_irods.html">local_create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># connect project to server</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># authenticate</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># authenticate</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># some data</span></span></span>
-<span class="r-in"><span>  <span class="va">foo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># some data</span></span></span>
+<span class="r-in"><span><span class="va">foo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># store data in iRODS</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="iput.html">isaveRDS</a></span><span class="op">(</span><span class="va">foo</span>, <span class="st">"foo.rds"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># store data in iRODS</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="iput.html">isaveRDS</a></span><span class="op">(</span><span class="va">foo</span>, <span class="st">"foo.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># add some metadata</span></span></span>
+<span class="r-in"><span><span class="co"># add some metadata</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="imeta.html">imeta</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"foo.rds"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"data_object"</span>,</span></span>
+<span class="r-in"><span>  operations <span class="op">=</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo"</span>, value <span class="op">=</span> <span class="st">"bar"</span>,</span></span>
+<span class="r-in"><span>      units <span class="op">=</span> <span class="st">"baz"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="imeta.html">imeta</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"foo.rds"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"data_object"</span>,</span></span>
-<span class="r-in"><span>    operations <span class="op">=</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo"</span>, value <span class="op">=</span> <span class="st">"bar"</span>,</span></span>
-<span class="r-in"><span>        units <span class="op">=</span> <span class="st">"baz"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>   <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># iRODS Zone with metadata</span></span></span>
+<span class="r-in"><span><span class="va">irods_zone</span> <span class="op">&lt;-</span> <span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># iRODS Zone with metadata</span></span></span>
-<span class="r-in"><span>  <span class="va">irods_zone</span> <span class="op">&lt;-</span> <span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># check class</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "irods_df"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># check class</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># coerce into `data.frame` and extract metadata of "foo.rds"</span></span></span>
+<span class="r-in"><span><span class="va">irods_zone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">irods_zone</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">$</span><span class="va">logical_path</span><span class="op">)</span> <span class="op">==</span> <span class="st">"foo.rds"</span>, <span class="st">"metadata"</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   attribute value units</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       foo   bar   baz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># coerce into `data.frame` and extract metadata of "foo.rds"</span></span></span>
-<span class="r-in"><span>  <span class="va">irods_zone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">irods_zone</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">$</span><span class="va">logical_path</span><span class="op">)</span> <span class="op">==</span> <span class="st">"foo.rds"</span>, <span class="st">"metadata"</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="co">#' # delete object</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="irm.html">irm</a></span><span class="op">(</span><span class="st">"foo.rds"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="use_irods_demo.html">stop_irods_demo</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># back to working directory</span></span></span>
-<span class="r-in"><span>  <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">deferred_run</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># remove iRODS project file</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">".irods"</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
