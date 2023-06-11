@@ -143,8 +143,8 @@ Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># bring the file back with a different name</span></span></span>
 <span class="r-in"><span><span class="fu">iget</span><span class="op">(</span><span class="st">"iris.csv"</span>, <span class="st">"newer_iris.csv"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="st">"new_iris.csv"</span><span class="op">)</span> <span class="co"># check that it has been transferred</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="st">"newer_iris.csv"</span><span class="op">)</span> <span class="co"># check that it has been transferred</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># send an R object to iRODS in RDS format</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iput.html">isaveRDS</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">"irids_in_rds.rds"</span><span class="op">)</span></span></span>
