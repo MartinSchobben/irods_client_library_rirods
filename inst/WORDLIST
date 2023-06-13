@@ -9,6 +9,7 @@ arg
 childtoresc
 cpp
 csv
+devtools
 findability
 github
 hardcoding
@@ -24,3 +25,4 @@ macOS
 mockfiles
 reusability
 tempZone
+usethis

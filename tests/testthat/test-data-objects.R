@@ -14,10 +14,10 @@ with_mock_dir("data-objects", {
     expect_equal(dfr, ireadRDS("dfr.rds",  overwrite = TRUE))
     expect_invisible(irm("dfr.rds", force = TRUE))
     # external files
-    readr::write_csv(dfr, "dfr.csv")
+    write.csv(dfr, "dfr.csv")
     expect_invisible(iput("dfr.csv",  overwrite = TRUE))
     expect_invisible(iget("dfr.csv",  overwrite = TRUE))
-    expect_equal(dfr, as.data.frame(readr::read_csv("dfr.csv", show_col_types = FALSE)))
+    expect_equal(dfr, read.csv("dfr.csv", row.names = 1))
     expect_invisible(irm("dfr.csv", force = TRUE))
     unlink("dfr.csv")
 
@@ -30,10 +30,10 @@ with_mock_dir("data-objects", {
     expect_equal(mt, ireadRDS("mt.rds",  overwrite = TRUE))
     expect_invisible(irm("mt.rds", force = TRUE))
     # external files
-    readr::write_csv(as.data.frame(mt), "mt.csv")
+    write.csv(as.data.frame(mt), "mt.csv")
     expect_invisible(iput("mt.csv",  overwrite = TRUE))
-    expect_equal(file.size("mt.csv"), ils(stat = TRUE)$status_information$size)
     expect_invisible(iget("mt.csv",  overwrite = TRUE))
+    expect_equal(as.data.frame(mt), read.csv("mt.csv", row.names = 1))
     expect_invisible(irm("mt.csv", force = TRUE))
     unlink("mt.csv")
     })

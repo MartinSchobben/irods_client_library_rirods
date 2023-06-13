@@ -40,7 +40,7 @@ tk <- try({
   withr::defer(unlink("baz.rds"), teardown_env())
 
   # creates a csv file of foo
-  readr::write_csv(foo, "foo.csv")
+  write.csv(foo, "foo.csv")
   withr::defer(unlink("foo.csv"), teardown_env())
 
   # authenticate
