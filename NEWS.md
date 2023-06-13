@@ -1,3 +1,3 @@
-# rirods (development version)
+# rirods 0.1.0
 
 * Initial CRAN submission.
