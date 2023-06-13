@@ -139,7 +139,7 @@ ireadRDS("foo.rds")
 
 Possibly Alice does not want a native R object to be stored on iRODS but a file type that can be accessed by other programs. For this, use the `iput()` command:
 
-```{r filetypes}
+```{r filetypes, eval=requireNamespace("readr")}
 library(readr)
 
 # creates a csv file of foo
@@ -152,13 +152,13 @@ iput("foo.csv")
 ils()
 ```
 
-```{r rmfile, include=FALSE}
+```{r rmfile, include=FALSE, eval=requireNamespace("readr")}
 unlink("foo.csv")
 ```
 
 Later on somebody else might want to download this file again and store it locally:
 
-```{r csv}
+```{r csv, eval=requireNamespace("readr")}
 # retrieve it again later
 iget("foo.csv")
 read_csv("foo.csv")
@@ -182,7 +182,7 @@ iquery("SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'")
 
 Finally, we can clean up Alice's home collection:
 
-```{r clean}
+```{r clean, eval=requireNamespace("readr")}
 # delete object
 irm("foo.rds", force = TRUE)
 irm("foo.csv", force = TRUE)
@@ -191,7 +191,7 @@ irm("foo.csv", force = TRUE)
 ils()
 ```
 
-```{r down, eval=FALSE}
+```{r down}
 # close the server
 stop_irods_demo()
 # optionally remove the Docker images

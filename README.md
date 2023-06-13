@@ -17,6 +17,12 @@ The rirods package is an R client for iRODS.
 You can install the development version of rirods like so:
 
 ``` r
+install.packages("rirods")
+```
+
+Or, the development version from GitHub, like so:
+
+``` r
 # install.packages("devtools")
 devtools::install_github("irods/irods_client_library_rirods")
 ```
