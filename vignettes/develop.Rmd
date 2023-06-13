@@ -61,7 +61,7 @@ Alternatively, one can use the R function `use_irods_demo()`.
 
 Note, that both options can only be used if Docker and the Docker-compose plugin are installed.
 
-This will result in the demonstration REST API running at http://localhost/irods-rest/0.9.3 (or later version). 
+This will result in the demonstration REST API running at `http://localhost/irods-rest/0.9.3` (or later version). 
 No further configuration in R is needed for development (except for removing 
 possible mock files). For example, to run the unit tests against this local 
 server use: `devtools::test()`.
