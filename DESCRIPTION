@@ -28,7 +28,6 @@ Imports:
     base64enc,
     httr2 (>= 0.2.2),
     methods,
-    testthat (>= 3.0.0),
     tools,
     utils,
     withr
@@ -39,6 +38,7 @@ Suggests:
     readr,
     rmarkdown,
     spelling,
+    testthat (>= 3.0.0),
     xml2
 VignetteBuilder: 
     knitr
