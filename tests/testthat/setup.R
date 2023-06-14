@@ -13,10 +13,10 @@ library(httr2)
 #-----------------------------------------------------------------------------
 
 if (Sys.getenv("DEV_KEY_IRODS") != "") {
-  user <- httr2::secret_decrypt(Sys.getenv("DEV_USER"), "DEV_KEY_IRODS")
-  pass <- httr2::secret_decrypt(Sys.getenv("DEV_PASS"), "DEV_KEY_IRODS")
-  lpath <- httr2::secret_decrypt(Sys.getenv("DEV_ZONE_PATH_IRODS"), "DEV_KEY_IRODS")
-  host <- httr2::secret_decrypt(Sys.getenv("DEV_HOST_IRODS"), "DEV_KEY_IRODS")
+  user <- secret_decrypt(Sys.getenv("DEV_USER"), "DEV_KEY_IRODS")
+  pass <- secret_decrypt(Sys.getenv("DEV_PASS"), "DEV_KEY_IRODS")
+  lpath <- secret_decrypt(Sys.getenv("DEV_ZONE_PATH_IRODS"), "DEV_KEY_IRODS")
+  host <- secret_decrypt(Sys.getenv("DEV_HOST_IRODS"), "DEV_KEY_IRODS")
 } else {
   user <- "rods"
   pass <- "rods"
@@ -30,13 +30,6 @@ tk <- try({
   # switch to new iRODS project
   create_irods(host, lpath, overwrite = TRUE)
   withr::defer(unlink("testthat.irods"), teardown_env())
-
-  # some data
-  baz <- matrix(1:100000)
-
-  # save baz
-  saveRDS(baz, "baz.rds")
-  withr::defer(unlink("baz.rds"), teardown_env())
 
   # authenticate
   iauth(user, pass, "rodsuser")
@@ -72,7 +65,7 @@ if (inherits(tk, "try-error")) {
   # set home dir
   # check path formatting, does it end with "/"? If not, then add it.
   if (!grepl("/$", rirods:::find_irods_file("zone_path")))
-    zone_path <- paste0( rirods:::find_irods_file("zone_path"), "/")
+    zone_path <- paste0(rirods:::find_irods_file("zone_path"), "/")
   .rirods$current_dir <- paste0(zone_path, user, "/testthat")
   # store token
   assign("token", "secret", envir = .rirods)

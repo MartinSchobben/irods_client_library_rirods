@@ -1,8 +1,8 @@
 # path to external files
 pt <- system.file("extdata", package = "rirods")
 
-foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
 # creates a csv file of foo
+foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
 readr::write_csv(foo, file.path(pt, "foo.csv"))
 
 # small file
