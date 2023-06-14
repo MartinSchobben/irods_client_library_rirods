@@ -36,8 +36,11 @@ with_mock_dir("remove-objects", {
     # currently mocking does not work
     skip_if(.rirods$token == "secret", "IRODS server unavailable")
 
+    # external files
+    pt <- system.file("extdata", "foo.csv", package = "rirods")
+
     # store
-    iput("foo.csv", "foo.csv", overwrite = TRUE)
+    iput(pt, overwrite = TRUE)
 
     # delete object "foo.csv"
     expect_invisible(irm("foo.csv", force = TRUE))

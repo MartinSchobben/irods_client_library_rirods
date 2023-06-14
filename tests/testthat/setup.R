@@ -32,16 +32,11 @@ tk <- try({
   withr::defer(unlink("testthat.irods"), teardown_env())
 
   # some data
-  foo <- data.frame(x = c(1, 8, 9), y = c("x", "y", "z"))
   baz <- matrix(1:100000)
 
   # save baz
   saveRDS(baz, "baz.rds")
   withr::defer(unlink("baz.rds"), teardown_env())
-
-  # creates a csv file of foo
-  write.csv(foo, "foo.csv")
-  withr::defer(unlink("foo.csv"), teardown_env())
 
   # authenticate
   iauth(user, pass, "rodsuser")

@@ -1,5 +1,5 @@
-with_mock_dir("data-objects", {
-  test_that("external data-objects management works", {
+with_mock_dir("small-data-objects", {
+  test_that("external small data-objects management works", {
 
     # I use the argument overwrite = TRUE here so that the
     # call to the list REST API is omitted. This omits an additional snapshot
@@ -14,29 +14,35 @@ with_mock_dir("data-objects", {
     expect_equal(dfr, ireadRDS("dfr.rds",  overwrite = TRUE))
     expect_invisible(irm("dfr.rds", force = TRUE))
     # external files
-    write.csv(dfr, "dfr.csv")
-    expect_invisible(iput("dfr.csv",  overwrite = TRUE))
+    pt <- system.file("extdata", "dfr.csv", package = "rirods")
+    expect_invisible(iput(pt,  overwrite = TRUE))
     expect_invisible(iget("dfr.csv",  overwrite = TRUE))
-    expect_equal(dfr, read.csv("dfr.csv", row.names = 1))
+    expect_equal(dfr, read.csv("dfr.csv"))
     expect_invisible(irm("dfr.csv", force = TRUE))
     unlink("dfr.csv")
+  })
+},
+simplify = FALSE
+)
 
+with_mock_dir("large-data-objects", {
+  test_that("external large data-objects management works", {
     # --------------------------------------------------------------------------
     # store large objects in iRODS
     # --------------------------------------------------------------------------
-    mt <- list(1:10000)
+    mt <- matrix(1:1000, ncol = 5)
     # R objects
     expect_invisible(isaveRDS(mt, "mt.rds",  overwrite = TRUE))
     expect_equal(mt, ireadRDS("mt.rds",  overwrite = TRUE))
     expect_invisible(irm("mt.rds", force = TRUE))
     # external files
-    write.csv(as.data.frame(mt), "mt.csv")
-    expect_invisible(iput("mt.csv",  overwrite = TRUE))
+    pt <- system.file("extdata", "mt.csv", package = "rirods")
+    expect_invisible(iput(pt,  overwrite = TRUE))
+    expect_equal(file.size(pt), ils(stat = TRUE)$status_information$size)
     expect_invisible(iget("mt.csv",  overwrite = TRUE))
-    expect_equal(as.data.frame(mt), read.csv("mt.csv", row.names = 1))
     expect_invisible(irm("mt.csv", force = TRUE))
     unlink("mt.csv")
-    })
+  })
 },
 simplify = FALSE
 )
