@@ -126,15 +126,21 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create dir '/home/runner/.config/R/rirods', reason 'No such file or directory'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create file '/home/runner/.config/R/rirods/config.irods', reason 'No such file or directory'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/home/runner/.config/R/rirods/config.irods': No such file or directory</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(file, ifelse(append, "a", "w")):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># authenticate</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Can't find iRODS configuration file. Please use `create_irods()`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># some data</span></span></span>
 <span class="r-in"><span><span class="va">foo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># store data in iRODS</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iput.html">isaveRDS</a></span><span class="op">(</span><span class="va">foo</span>, <span class="st">"foo.rds"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># add some metadata</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="imeta.html">imeta</a></span><span class="op">(</span></span></span>
@@ -144,49 +150,26 @@
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo"</span>, value <span class="op">=</span> <span class="st">"bar"</span>,</span></span>
 <span class="r-in"><span>     units <span class="op">=</span> <span class="st">"baz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># iRODS Zone with metadata</span></span></span>
 <span class="r-in"><span><span class="va">irods_zone</span> <span class="op">&lt;-</span> <span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># print (default no row.names)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">irods_zone</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> metadata</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tempZone/home/rods/foo.rds :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  attribute value units</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        foo   bar   baz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iRODS Zone</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 logical_path        type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tempZone/home/rods/foo.rds data_object</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'irods_zone' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># with row.names</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">irods_zone</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> metadata</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tempZone/home/rods/foo.rds :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   attribute value units</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       foo   bar   baz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iRODS Zone</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  logical_path        type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 /tempZone/home/rods/foo.rds data_object</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'irods_zone' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># delete object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="irm.html">irm</a></span><span class="op">(</span><span class="st">"foo.rds"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># remove iRODS project file</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">".irods"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove iRODS configuration</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="create_irods.html">remove_irods</a></span><span class="op">(</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
