@@ -135,34 +135,39 @@ information.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create dir '/home/runner/.config/R/rirods', reason 'No such file or directory'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create file '/home/runner/.config/R/rirods/config.irods', reason 'No such file or directory'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/home/runner/.config/R/rirods/config.irods': No such file or directory</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(file, ifelse(append, "a", "w")):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># authenticate</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Can't find iRODS configuration file. Please use `create_irods()`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># list home directory</span></span></span>
 <span class="r-in"><span><span class="fu">ils</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This collection does not contain any objects or collections.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make collection</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="imkdir.html">imkdir</a></span><span class="op">(</span><span class="st">"some_collection"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># list a different directory</span></span></span>
 <span class="r-in"><span><span class="fu">ils</span><span class="op">(</span><span class="st">"/tempZone/home/rods/some_collection"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> This collection does not contain any objects or collections.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show metadata</span></span></span>
 <span class="r-in"><span><span class="fu">ils</span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> metadata</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tempZone/home/rods/some_collection :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iRODS Zone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         logical_path       type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tempZone/home/rods/some_collection collection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># delete `some_collection`</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="irm.html">irm</a></span><span class="op">(</span><span class="st">"some_collection"</span>, force <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Not connected to iRODS.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># remove iRODS configuration</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_irods.html">remove_irods</a></span><span class="op">(</span><span class="op">)</span></span></span>

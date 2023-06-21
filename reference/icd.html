@@ -97,42 +97,32 @@ in the local system, <code>ipwd()</code> returns the current working directory i
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create dir '/home/runner/.config/R/rirods', reason 'No such file or directory'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot create file '/home/runner/.config/R/rirods/config.irods', reason 'No such file or directory'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/home/runner/.config/R/rirods/config.irods': No such file or directory</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(file, ifelse(append, "a", "w")):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># authenticate</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Can't find iRODS configuration file. Please use `create_irods()`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># default dir</span></span></span>
 <span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(quote(current_dir), .rirods):</span> object 'current_dir' not found</span>
 <span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home/rods"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># relative paths work as well</span></span></span>
 <span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(quote(current_dir), .rirods):</span> object 'current_dir' not found</span>
 <span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># go back on level lower</span></span></span>
 <span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">".."</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(quote(current_dir), .rirods):</span> object 'current_dir' not found</span>
 <span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># absolute paths work as well</span></span></span>
 <span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home/rods"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(quote(current_dir), .rirods):</span> object 'current_dir' not found</span>
 <span class="r-in"><span><span class="fu">ipwd</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tempZone/home/rods"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># back home</span></span></span>
 <span class="r-in"><span><span class="fu">icd</span><span class="op">(</span><span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(quote(current_dir), .rirods):</span> object 'current_dir' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># remove iRODS configuration</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_irods.html">remove_irods</a></span><span class="op">(</span><span class="op">)</span></span></span>
