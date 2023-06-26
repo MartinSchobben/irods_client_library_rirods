@@ -131,9 +131,8 @@ further configuration in R is needed for development (except for
 removing possible mock files). For example, to run the unit tests
 against this local server use: <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code>.</p>
 <p>For miscellaneous development tasks one can, furthermore, use:
-<code><a href="../reference/local_create_irods.html">local_create_irods()</a></code>. This test fixture is almost the same
-as the exported function <code><a href="../reference/create_irods.html">create_irods()</a></code> except that it uses
-an alternative directory as the working directory thereby preventing
+<code><a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">usethis::local_project</a></code>. This test fixture uses an
+alternative directory as the working directory thereby preventing
 cluttering of the package source files (defaults to a temporary
 directory). The working directory can be restored to the package
 directory by restarting the R session (possibly with
