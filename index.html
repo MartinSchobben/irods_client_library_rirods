@@ -127,7 +127,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/irods/irods_client_library_rirods" class="external-link">rirods</a></span><span class="op">)</span></span>
 <span><span class="co"># setup a mock iRODS server (https://github.com/irods/irods_demo)</span></span>
 <span><span class="fu"><a href="reference/use_irods_demo.html">use_irods_demo</a></span><span class="op">(</span><span class="st">"alice"</span>, <span class="st">"passWORD"</span><span class="op">)</span></span></code></pre></div>
-<p>This will result in the demonstration REST API running at <a href="http://localhost/irods-rest/0.9.3" class="external-link uri">http://localhost/irods-rest/0.9.3</a> (or later version).</p>
+<p>This will result in the demonstration REST API running at <code>http://localhost/irods-rest/0.9.3</code> (or later version).</p>
 <p>These Docker containers are designed to easily stand up a <strong>DEMONSTRATION</strong> of the iRODS server. It is intended for education and exploration. (See also <code><a href="articles/demo.html">vignette("demo")</a></code>.)</p>
 <p><strong>DO NOT USE IN PRODUCTION</strong></p>
 </div>
@@ -156,6 +156,7 @@
 <span></span>
 <span><span class="co"># check where we are in the iRODS namespace</span></span>
 <span><span class="fu"><a href="reference/icd.html">ipwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "/tempZone/home/alice"</span></span>
 <span></span>
 <span><span class="co"># store data in iRODS</span></span>
 <span><span class="fu"><a href="reference/iput.html">isaveRDS</a></span><span class="op">(</span><span class="va">foo</span>, <span class="st">"foo.rds"</span><span class="op">)</span></span></code></pre></div>
@@ -174,7 +175,21 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># check if file is stored with associated metadata</span></span>
-<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ========</span></span>
+<span><span class="co">#&gt; metadata</span></span>
+<span><span class="co">#&gt; ========</span></span>
+<span><span class="co">#&gt; /tempZone/home/alice/foo.rds :</span></span>
+<span><span class="co">#&gt;  attribute value units</span></span>
+<span><span class="co">#&gt;        foo   bar   baz</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                  logical_path        type</span></span>
+<span><span class="co">#&gt;  /tempZone/home/alice/foo.rds data_object</span></span></code></pre></div>
 <p>For more on using metadata, check out <code><a href="articles/metadata.html">vignette("metadata")</a></code>.</p>
 </div>
 <div class="section level3">
@@ -183,7 +198,11 @@
 <p>If Alice wanted to copy the foo R object from an iRODS collection to her current R session, she would use <code><a href="reference/iget.html">ireadRDS()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve in native R format</span></span>
-<span><span class="fu"><a href="reference/iget.html">ireadRDS</a></span><span class="op">(</span><span class="st">"foo.rds"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/iget.html">ireadRDS</a></span><span class="op">(</span><span class="st">"foo.rds"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   x y</span></span>
+<span><span class="co">#&gt; 1 1 x</span></span>
+<span><span class="co">#&gt; 2 8 y</span></span>
+<span><span class="co">#&gt; 3 9 z</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-file-formats">Other file formats<a class="anchor" aria-label="anchor" href="#other-file-formats"></a>
@@ -199,12 +218,33 @@
 <span><span class="fu"><a href="reference/iput.html">iput</a></span><span class="op">(</span><span class="st">"foo.csv"</span>, <span class="st">"foo.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># check whether it is stored</span></span>
-<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                  logical_path        type</span></span>
+<span><span class="co">#&gt;  /tempZone/home/alice/foo.csv data_object</span></span>
+<span><span class="co">#&gt;  /tempZone/home/alice/foo.rds data_object</span></span></code></pre></div>
 <p>Later on somebody else might want to download this file again and store it locally:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve it again later</span></span>
 <span><span class="fu"><a href="reference/iget.html">iget</a></span><span class="op">(</span><span class="st">"foo.csv"</span>, <span class="st">"foo.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"foo.csv"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="st">"foo.csv"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 3 Columns: 2</span></span>
+<span><span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Delimiter: ","</span></span>
+<span><span class="co">#&gt; chr (1): y</span></span>
+<span><span class="co">#&gt; dbl (1): x</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span><span class="co">#&gt;       x y    </span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1     1 x    </span></span>
+<span><span class="co">#&gt; 2     8 y    </span></span>
+<span><span class="co">#&gt; 3     9 z</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="query">Query<a class="anchor" aria-label="anchor" href="#query"></a>
@@ -212,10 +252,16 @@
 <p>By adding metadata you and others can more easily discover data in future projects. Objects can be searched with General Queries and <code><a href="reference/iquery.html">iquery()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># look for objects in the home collection with a wildcard `%`</span></span>
-<span><span class="fu"><a href="reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/%'"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE COLL_NAME LIKE '/tempZone/home/%'"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              COLL_NAME DATA_NAME</span></span>
+<span><span class="co">#&gt; 1 /tempZone/home/alice   foo.csv</span></span>
+<span><span class="co">#&gt; 2 /tempZone/home/alice   foo.rds</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># or for data objects with a name that starts with "foo"</span></span>
-<span><span class="fu"><a href="reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME, DATA_NAME WHERE DATA_NAME LIKE 'foo%'"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              COLL_NAME DATA_NAME</span></span>
+<span><span class="co">#&gt; 1 /tempZone/home/alice   foo.csv</span></span>
+<span><span class="co">#&gt; 2 /tempZone/home/alice   foo.rds</span></span></code></pre></div>
 <p>For more on querying, check out <code><a href="articles/metadata.html">vignette("metadata")</a></code>.</p>
 </div>
 <div class="section level3">
@@ -228,7 +274,8 @@
 <span><span class="fu"><a href="reference/irm.html">irm</a></span><span class="op">(</span><span class="st">"foo.csv"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># check if objects are removed</span></span>
-<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; This collection does not contain any objects or collections.</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># close the server</span></span>
 <span><span class="fu"><a href="reference/use_irods_demo.html">stop_irods_demo</a></span><span class="op">(</span><span class="op">)</span></span>
