@@ -146,7 +146,7 @@ locally. This is the current output of <code><a href="https://rdrr.io/r/base/get
 <code><a href="../reference/icd.html">ipwd()</a></code> respectively:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmpBMzRKC"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmprMAQ1y"</span></span>
 <span><span class="fu"><a href="../reference/icd.html">ipwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "/tempZone/home/rods"</span></span></code></pre></div>
 <p>We can see their contents with <code>dir(path)</code> or
@@ -155,11 +155,11 @@ If <code>path</code> is not provided, the current working directory is
 used as default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">dir</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "data"                            "file5d593ad159f5"               </span></span>
-<span><span class="co">#&gt; [3] "file5d5941fefc23"                "file5d5952cc7c73"               </span></span>
+<span><span class="co">#&gt; [1] "data"                            "file5cdd42e5a32a"               </span></span>
+<span><span class="co">#&gt; [3] "file5cdd5bbb7285"                "file5cdd70dbedbf"               </span></span>
 <span><span class="co">#&gt; [5] "libloc_177_4deaa61661921490.rds" "libloc_220_e632dc491489e26.rds" </span></span>
 <span><span class="co">#&gt; [7] "libloc_248_96893be67ad5663d.rds" "local-irods"                    </span></span>
-<span><span class="co">#&gt; [9] "rmarkdown-str5d5955c9bd1e.html"</span></span>
+<span><span class="co">#&gt; [9] "rmarkdown-str5cdd2c57560.html"</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ==========</span></span>
@@ -188,7 +188,7 @@ iRODS working directory to its parent collection.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">old_local</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmpBMzRKC"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmprMAQ1y"</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/icd.html">icd</a></span><span class="op">(</span><span class="va">old_irods</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/icd.html">ipwd</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -207,13 +207,13 @@ first locally and then in iRODS.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"analysis"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">dir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "analysis"                        "data"                           </span></span>
-<span><span class="co">#&gt;  [3] "file5d591636cb86"                "file5d591b343bf4"               </span></span>
-<span><span class="co">#&gt;  [5] "file5d592e4452fe"                "file5d593ad159f5"               </span></span>
-<span><span class="co">#&gt;  [7] "file5d5941fefc23"                "file5d594a7c9bf"                </span></span>
-<span><span class="co">#&gt;  [9] "file5d5952cc7c73"                "file5d59746a94b6"               </span></span>
-<span><span class="co">#&gt; [11] "file5d59e40afe4"                 "libloc_177_4deaa61661921490.rds"</span></span>
+<span><span class="co">#&gt;  [3] "file5cdd187eaaa3"                "file5cdd317a0254"               </span></span>
+<span><span class="co">#&gt;  [5] "file5cdd39d609f2"                "file5cdd41e573ea"               </span></span>
+<span><span class="co">#&gt;  [7] "file5cdd42e5a32a"                "file5cdd44b1aa19"               </span></span>
+<span><span class="co">#&gt;  [9] "file5cdd5bbb7285"                "file5cdd63cfb9f6"               </span></span>
+<span><span class="co">#&gt; [11] "file5cdd70dbedbf"                "libloc_177_4deaa61661921490.rds"</span></span>
 <span><span class="co">#&gt; [13] "libloc_220_e632dc491489e26.rds"  "libloc_248_96893be67ad5663d.rds"</span></span>
-<span><span class="co">#&gt; [15] "local-irods"                     "rmarkdown-str5d5955c9bd1e.html"</span></span>
+<span><span class="co">#&gt; [15] "local-irods"                     "rmarkdown-str5cdd2c57560.html"</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/imkdir.html">imkdir</a></span><span class="op">(</span><span class="st">"analysis"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -367,19 +367,19 @@ whether the item should be deleted permanently or, if
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"analysis"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">dir</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "data"                            "file5d591636cb86"               </span></span>
-<span><span class="co">#&gt;  [3] "file5d591a477ec1"                "file5d591b343bf4"               </span></span>
-<span><span class="co">#&gt;  [5] "file5d5920cdb9d1"                "file5d59255a63a8"               </span></span>
-<span><span class="co">#&gt;  [7] "file5d592947de"                  "file5d592d62d469"               </span></span>
-<span><span class="co">#&gt;  [9] "file5d592e4452fe"                "file5d59382c8808"               </span></span>
-<span><span class="co">#&gt; [11] "file5d593ad159f5"                "file5d5941fefc23"               </span></span>
-<span><span class="co">#&gt; [13] "file5d594a7c9bf"                 "file5d5952cc7c73"               </span></span>
-<span><span class="co">#&gt; [15] "file5d595d3cee04"                "file5d5965b18161"               </span></span>
-<span><span class="co">#&gt; [17] "file5d5967c280b5"                "file5d59746a94b6"               </span></span>
-<span><span class="co">#&gt; [19] "file5d597c30c9be"                "file5d59e40afe4"                </span></span>
+<span><span class="co">#&gt;  [1] "data"                            "file5cdd1239a4ac"               </span></span>
+<span><span class="co">#&gt;  [3] "file5cdd187eaaa3"                "file5cdd1897f89d"               </span></span>
+<span><span class="co">#&gt;  [5] "file5cdd317a0254"                "file5cdd39d609f2"               </span></span>
+<span><span class="co">#&gt;  [7] "file5cdd41e573ea"                "file5cdd42e5a32a"               </span></span>
+<span><span class="co">#&gt;  [9] "file5cdd44b1aa19"                "file5cdd4be0b407"               </span></span>
+<span><span class="co">#&gt; [11] "file5cdd501e0a43"                "file5cdd5bbb7285"               </span></span>
+<span><span class="co">#&gt; [13] "file5cdd5d64368f"                "file5cdd5edb05fa"               </span></span>
+<span><span class="co">#&gt; [15] "file5cdd63cfb9f6"                "file5cdd669534c4"               </span></span>
+<span><span class="co">#&gt; [17] "file5cdd70dbedbf"                "file5cdd71f9e2b7"               </span></span>
+<span><span class="co">#&gt; [19] "file5cdd7e85ce1"                 "file5cddb584d39"                </span></span>
 <span><span class="co">#&gt; [21] "libloc_177_4deaa61661921490.rds" "libloc_220_e632dc491489e26.rds" </span></span>
 <span><span class="co">#&gt; [23] "libloc_248_96893be67ad5663d.rds" "local-irods"                    </span></span>
-<span><span class="co">#&gt; [25] "rmarkdown-str5d5955c9bd1e.html"</span></span>
+<span><span class="co">#&gt; [25] "rmarkdown-str5cdd2c57560.html"</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/irm.html">irm</a></span><span class="op">(</span><span class="st">"data"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
