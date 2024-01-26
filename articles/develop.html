@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Developing rirods">
 <meta property="og:description" content="rirods">
@@ -137,7 +137,7 @@ API):</p>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> https://github.com/irods/irods_demo</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># start the REST API</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> irods_demo</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span> nginx-reverse-proxy</span></code></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> nginx-reverse-proxy irods-client-http-api irods-client-icommands</span></code></pre></div>
 <p>Alternatively, one can use the R function
 <code><a href="../reference/use_irods_demo.html">use_irods_demo()</a></code>.</p>
 <p>Note, that both options can only be used if Docker and the
@@ -173,14 +173,12 @@ information. This information needs to be entered in the
 <span></span>
 <span><span class="co"># iRODS environment variables for development</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>DEV_HOST_IRODS <span class="op">=</span> <span class="st">"nLO8T0IpHCT2kXklYE-IB0HjYpNkg5wN4ZKk7TPSvkwGf9FauDR-O5mVI-mmD2_zNFGLoaVcAgYl"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>DEV_ZONE_PATH_IRODS <span class="op">=</span> <span class="st">"gunp5Ts08NHfpKAdbFCBuilVb7Wjnxojbt7bA1e-9Q"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>DEV_USER <span class="op">=</span> <span class="st">"ZGlORquE2G6BIPS5JAcuPcngmBB6Wg"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>DEV_PASS <span class="op">=</span> <span class="st">"ZGlORquE2G6BIPS5JAcuPcngmBB6Wg"</span><span class="op">)</span></span></code></pre></div>
 <p>The server information is stored in the environmental variables
-<code>DEV_HOST_IRODS</code> ,<code>DEV_ZONE_PATH_IRODS</code>,
-<code>DEV_USER</code>, and <code>DEV_PASS</code>. Server information is
-provided in scrambled format to prevent leakage of sensitive information
-to GitHub.</p>
+<code>DEV_HOST_IRODS</code> , <code>DEV_USER</code>, and
+<code>DEV_PASS</code>. Server information is provided in scrambled
+format to prevent leakage of sensitive information to GitHub.</p>
 <p>The following step are needed to scramble this information.</p>
 <ol style="list-style-type: decimal">
 <li>Generate package development key:</li>
@@ -201,14 +199,12 @@ the user level. For convenience one can use
 name as follows:</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/secrets.html" class="external-link">secret_encrypt</a></span><span class="op">(</span><span class="st">"http://myserver/irods-rest/0.9.3"</span> ,<span class="st">"DEV_KEY_IRODS"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/secrets.html" class="external-link">secret_encrypt</a></span><span class="op">(</span><span class="st">"http://localhost:9001/irods-http-api/0.1.0"</span> ,<span class="st">"DEV_KEY_IRODS"</span><span class="op">)</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Store the scrambled information at the designated places in the
 project level <code>.Rprofile</code>: host name under
-<code>DEV_HOST_IRODS</code>, zone path under
-<code>DEV_ZONE_PATH_IRODS</code> (e.g., <code>"/tempZone/home"</code>),
-user name under <code>DEV_USER</code>, and password under
-<code>DEV_PASS</code>.</p></li>
+<code>DEV_HOST_IRODS</code>, user name under <code>DEV_USER</code>, and
+password under <code>DEV_PASS</code>.</p></li>
 <li><p>Restart the R sessions (possibly with
 <code>CTRL + SHIFT + F10</code>).</p></li>
 </ol>

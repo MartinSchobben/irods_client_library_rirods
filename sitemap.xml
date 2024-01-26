@@ -76,7 +76,7 @@
     <loc>https://irods.github.io/irods_client_library_rirods/reference/irm.html</loc>
   </url>
   <url>
-    <loc>https://irods.github.io/irods_client_library_rirods/reference/irods_rest_call.html</loc>
+    <loc>https://irods.github.io/irods_client_library_rirods/reference/irods_http_call.html</loc>
   </url>
   <url>
     <loc>https://irods.github.io/irods_client_library_rirods/reference/is_connected_irods.html</loc>
