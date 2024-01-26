@@ -142,7 +142,7 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># use_irods_demo()</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost:9001/irods-http-api/0.1.0"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># authentication</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
@@ -158,7 +158,6 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># add some metadata</span></span></span>
 <span class="r-in"><span><span class="fu">imeta</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">"foo.rds"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"data_object"</span>,</span></span>
 <span class="r-in"><span>   operations <span class="op">=</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
@@ -169,7 +168,6 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># `operations` can contain multiple tags supplied as a `data.frame`</span></span></span>
 <span class="r-in"><span><span class="fu">imeta</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"foo.rds"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"data_object"</span>,</span></span>
 <span class="r-in"><span>  operations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    operation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"add"</span>, <span class="st">"add"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    attribute <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"foo2"</span>, <span class="st">"foo3"</span><span class="op">)</span>,</span></span>
@@ -181,7 +179,6 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># or again as a list of lists</span></span></span>
 <span class="r-in"><span><span class="fu">imeta</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"foo.rds"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"data_object"</span>,</span></span>
 <span class="r-in"><span>  operations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo4"</span>, value <span class="op">=</span> <span class="st">"bar4"</span>, units <span class="op">=</span> <span class="st">"baz4"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo5"</span>, value <span class="op">=</span> <span class="st">"bar5"</span>, units <span class="op">=</span> <span class="st">"baz5"</span><span class="op">)</span></span></span>
@@ -191,7 +188,6 @@ and response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># list of lists are useful as AVUs don't have to contain units</span></span></span>
 <span class="r-in"><span><span class="fu">imeta</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"foo.rds"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"data_object"</span>,</span></span>
 <span class="r-in"><span>  operations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo6"</span>, value <span class="op">=</span> <span class="st">"bar6"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"add"</span>, attribute <span class="op">=</span> <span class="st">"foo7"</span>, value <span class="op">=</span> <span class="st">"bar7"</span>, units <span class="op">=</span> <span class="st">"baz7"</span><span class="op">)</span></span></span>
