@@ -71,7 +71,7 @@
 <span>  <span class="va">name</span>,</span>
 <span>  password <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>  action <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"create_user"</span>, <span class="st">"set_password"</span>, <span class="st">"remove_user"</span><span class="op">)</span>,</span>
-<span>  role <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rodsuser"</span>, <span class="st">"rodsadmin"</span><span class="op">)</span>,</span>
+<span>  role <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rodsuser"</span>, <span class="st">"groupadmin"</span>, <span class="st">"rodsadmin"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -83,15 +83,15 @@
 
 
 <dt>password</dt>
-<dd><p>Password of to be added.</p></dd>
+<dd><p>Password to be added.</p></dd>
 
 
 <dt>action</dt>
-<dd><p>The action: create_user, remove_user, or set_password.</p></dd>
+<dd><p>The action: <code>"create_user"</code>, <code>"remove_user"</code>, or <code>"set_password"</code>.</p></dd>
 
 
 <dt>role</dt>
-<dd><p>Role of user: rodsuser or rodsadmin.</p></dd>
+<dd><p>Role of user: <code>"rodsuser"</code>, <code>"groupadmin"</code>, and <code>"groupadmin"</code>.</p></dd>
 
 
 <dt>verbose</dt>
@@ -115,7 +115,7 @@ Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># use_irods_demo()</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost/irods-rest/0.9.3"</span>, <span class="st">"/tempZone/home"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost:9001/irods-http-api/0.1.0"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># authentication</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>

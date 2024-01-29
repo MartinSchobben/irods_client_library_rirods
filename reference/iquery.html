@@ -93,11 +93,11 @@ equivalent <code>iquest</code> in the <a href="https://docs.irods.org/master/ico
 
 
 <dt>limit</dt>
-<dd><p>Maximum number of rows to return. Depracated.</p></dd>
+<dd><p>Maximum number of rows to return. Deprecated.</p></dd>
 
 
 <dt>offset</dt>
-<dd><p>Number of rows to skip for paging. Depracated.</p></dd>
+<dd><p>Number of rows to skip for paging. Deprecated.</p></dd>
 
 
 <dt>type</dt>
@@ -105,32 +105,36 @@ equivalent <code>iquest</code> in the <a href="https://docs.irods.org/master/ico
 
 
 <dt>case_sensitive</dt>
-<dd><p>Whether the string matching in the query is case sensitive.
-Defaults to <code>TRUE</code>.</p></dd>
+<dd><p>Whether the string matching in the query is case
+sensitive. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>distinct</dt>
-<dd><p>Whether only distinct rows should be listed. Defaults to <code>TRUE</code>.</p></dd>
+<dd><p>Whether only distinct rows should be listed. Defaults to
+<code>TRUE</code>.</p></dd>
 
 
 <dt>parser</dt>
-<dd><p>Which parser to use: genquery1 or genquery2. Defaults to genquery1.</p></dd>
+<dd><p>Which parser to use: genquery1 or genquery2. Defaults to
+genquery1.</p></dd>
 
 
 <dt>sql_only</dt>
-<dd><p>Whether to use SQL syntax. Defaults to <code>FALSE</code>. Needs Genquery2.</p></dd>
+<dd><p>Whether to dry-run query and return SQL syntax query as
+return. Defaults to <code>FALSE</code>. Needs <a href="https://github.com/irods/irods_api_plugin_genquery2/?#api-plugin" class="external-link">Genquery2</a>.</p></dd>
 
 
 <dt>verbose</dt>
-<dd><p>Whether information should be printed about the HTTP request and response.</p></dd>
+<dd><p>Whether information should be printed about the HTTP request
+and response.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A dataframe with one row per result and one column per requested attribute,
-with "size" and "time" columns parsed to the right type.</p>
+<p>A dataframe with one row per result and one column per requested
+attribute, with "size" and "time" columns parsed to the right type.</p>
 
 
 <p>Invisibly, the HTTP response.</p>
@@ -138,7 +142,8 @@ with "size" and "time" columns parsed to the right type.</p>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>https://docs.irods.org/master/icommands/user/#iquest</p>
-<p>Use SQL-like expressions to query data objects and collections based on different properties.</p>
+<p>Use SQL-like expressions to query data objects and collections based on
+different properties.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
