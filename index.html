@@ -119,19 +119,19 @@
 <h2 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h2>
 <p>This package connects to the iRODS C++ HTTP API - <a href="https://github.com/irods/irods_client_http_api" class="external-link uri">https://github.com/irods/irods_client_http_api</a>.</p>
-<p>Launch a local demonstration iRODS service (including the REST API):</p>
+<p>Launch a local demonstration iRODS service (including the HTTP API):</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rirods)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setup a mock iRODS server (https://github.com/irods/irods_demo)</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">use_irods_demo</span>(<span class="st">"alice"</span>, <span class="st">"passWORD"</span>)</span></code></pre></div>
-<p>This will result in the demonstration REST API running at <a href="http://localhost:9001/irods-http-api/0.2.0" class="external-link uri">http://localhost:9001/irods-http-api/0.2.0</a>.</p>
+<p>This will result in the demonstration HTTP API running at <a href="http://localhost:9001/irods-http-api/0.2.0" class="external-link uri">http://localhost:9001/irods-http-api/0.2.0</a>.</p>
 <p>These Docker containers are designed to easily stand up a <strong>DEMONSTRATION</strong> of the iRODS server. It is intended for education and exploration. (See also <code><a href="articles/demo.html">vignette("demo")</a></code>.)</p>
 <p><strong>DO NOT USE IN PRODUCTION</strong></p>
 </div>
 <div class="section level2">
 <h2 id="example-usage">Example Usage<a class="anchor" aria-label="anchor" href="#example-usage"></a>
 </h2>
-<p>To connect to the REST API endpoint of your choice, load <code>rirods</code>, connect with <code><a href="reference/create_irods.html">create_irods()</a></code>, and authenticate with your iRODS credentials:</p>
+<p>To connect to the HTTP API endpoint of your choice, load <code>rirods</code>, connect with <code><a href="reference/create_irods.html">create_irods()</a></code>, and authenticate with your iRODS credentials:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_irods</span>(<span class="st">"http://localhost:9001/irods-http-api/0.2.0"</span>)</span></code></pre></div>
 <div class="section level3">
 <h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
