@@ -107,10 +107,10 @@ and make a Pull Request.</p>
 <h2 id="prerequisites-r">Prerequisites R<a class="anchor" aria-label="anchor" href="#prerequisites-r"></a>
 </h2>
 <p>The following R packages are furthermore required for development:
-<code>xml2</code>, <code>jsonlite</code>, <code>readr</code>,
+<code>xml2</code>, <code>purrr</code>, <code>readr</code>,
 <code>testthat</code> (&gt;= 3.0.0), <code>knitr</code>,
-<code>rmarkdown</code>, <code>spelling</code>, and
-<code>httptest2</code>. For convenience, one can also use
+<code>rmarkdown</code>, <code>spelling</code>, <code>kableExtra</code>,
+and <code>httptest2</code>. For convenience, one can also use
 <code>renv</code> () and <code><a href="https://rstudio.github.io/renv/reference/restore.html" class="external-link">renv::restore()</a></code> to install all
 dependencies. The <code>usethis</code> and the <code>devtools</code>
 packages are further suggestions to streamline development. See <a href="https://devtools.r-lib.org/" class="external-link">devtools</a> and <a href="https://usethis.r-lib.org/" class="external-link">usethis</a> for common development
@@ -125,12 +125,12 @@ in several directories under <code>tests/testthat/</code>.</p>
 <h2 id="prerequisites-irods">Prerequisites iRODS<a class="anchor" aria-label="anchor" href="#prerequisites-irods"></a>
 </h2>
 <p>The unit test included in the source files can either be run against
-a local or remote iRODS C++ REST API service, version 0.9.3 or later -
-<a href="https://github.com/irods/irods_client_rest_cpp" class="external-link uri">https://github.com/irods/irods_client_rest_cpp</a>.</p>
+a local or remote iRODS C++ HTTP API service, version 0.9.3 or later -
+<a href="https://github.com/irods/irods_client_http_api" class="external-link uri">https://github.com/irods/irods_client_http_api</a>.</p>
 <div class="section level3">
 <h3 id="local-server">Local server<a class="anchor" aria-label="anchor" href="#local-server"></a>
 </h3>
-<p>Launch a local demonstration iRODS service (including the REST
+<p>Launch a local demonstration iRODS service (including the HTTP
 API):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clone the repository (and submodule "irods_demo")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or use `git submodule update --init` when already cloned without submodules</span></span>
@@ -142,11 +142,10 @@ API):</p>
 <code><a href="../reference/use_irods_demo.html">use_irods_demo()</a></code>.</p>
 <p>Note, that both options can only be used if Docker and the
 Docker-compose plugin are installed.</p>
-<p>This will result in the demonstration REST API running at
-<code>http://localhost/irods-rest/0.9.3</code> (or later version). No
-further configuration in R is needed for development (except for
-removing possible mock files). For example, to run the unit tests
-against this local server use: <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code>.</p>
+<p>This will result in the demonstration REST API running at <a href="http://localhost:9001/irods-http-api/0.2.0" class="external-link uri">http://localhost:9001/irods-http-api/0.2.0</a> (or later
+version). No further configuration in R is needed for development
+(except for removing possible mock files). For example, to run the unit
+tests against this local server use: <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code>.</p>
 <p>For miscellaneous development tasks one can, furthermore, use:
 <code><a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">usethis::local_project</a></code>. This test fixture uses an
 alternative directory as the working directory thereby preventing
