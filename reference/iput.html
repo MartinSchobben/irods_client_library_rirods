@@ -77,9 +77,8 @@ the current environment in iRODS in RDS format (see <code><a href="https://rdrr.
 <span>  <span class="va">local_path</span>,</span>
 <span>  <span class="va">logical_path</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  count <span class="op">=</span> <span class="fu">find_irods_file</span><span class="op">(</span><span class="st">"max_http_request_size_in_bytes"</span><span class="op">)</span>,</span>
+<span>  count <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  truncate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  append <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ticket <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -89,9 +88,8 @@ the current environment in iRODS in RDS format (see <code><a href="https://rdrr.
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">logical_path</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  count <span class="op">=</span> <span class="fu">find_irods_file</span><span class="op">(</span><span class="st">"max_http_request_size_in_bytes"</span><span class="op">)</span>,</span>
+<span>  count <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  truncate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  append <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ticket <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -109,20 +107,15 @@ the current environment in iRODS in RDS format (see <code><a href="https://rdrr.
 
 
 <dt>offset</dt>
-<dd><p>Offset in bytes into the data object. Defaults to 0.</p></dd>
+<dd><p>Offset in bytes into the data object. Deprecated.</p></dd>
 
 
 <dt>count</dt>
-<dd><p>Maximum number of bytes to write. Defaults to 2000.</p></dd>
+<dd><p>Maximum number of bytes to write. Deprecated.</p></dd>
 
 
 <dt>truncate</dt>
-<dd><p>Whether to truncate the object when opening it. Defaults to
-<code>TRUE</code>.</p></dd>
-
-
-<dt>append</dt>
-<dd><p>Whether to append the objects.</p></dd>
+<dd><p>Whether to truncate the object when opening it. Deprecated.</p></dd>
 
 
 <dt>verbose</dt>
@@ -131,7 +124,8 @@ response. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>overwrite</dt>
-<dd><p>Deprecated. Use <code>truncate</code>.</p></dd>
+<dd><p>Whether the file in iRODS should be overwritten if it
+exists. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>ticket</dt>
@@ -157,18 +151,16 @@ response. Defaults to <code>FALSE</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># is_irods_demo_running()</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="is_irods_demo_running.html">is_irods_demo_running</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="is_irods_demo_running.html">is_irods_demo_running</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="co"># \dontshow{</span></span></span>
+<span class="r-in"><span><span class="va">.old_config_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"R_USER_CONFIG_DIR"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">.old_wd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"R_USER_CONFIG_DIR"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span><span class="co"># demonstration server (requires Bash, Docker and Docker-compose)</span></span></span>
-<span class="r-in"><span><span class="co"># use_irods_demo()</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># connect project to server</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="st">"http://localhost:9001/irods-http-api/0.1.0"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="fu"><a href="create_irods.html">create_irods</a></span><span class="op">(</span><span class="va">x</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">rirods</span><span class="fu">:::</span><span class="fu">rirods_host</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># authenticate</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="iauth.html">iauth</a></span><span class="op">(</span><span class="st">"rods"</span>, <span class="st">"rods"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -179,6 +171,13 @@ response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span><span class="co"># save with a different name</span></span></span>
 <span class="r-in"><span><span class="fu">iput</span><span class="op">(</span><span class="st">"iris.csv"</span>, <span class="st">"iris_in_irods.csv"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iRODS Zone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ==========</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           logical_path</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           /tempZone/home/rods/iris.csv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tempZone/home/rods/iris_in_irods.csv</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># send an R object to iRODS in RDS format</span></span></span>
 <span class="r-in"><span><span class="fu">isaveRDS</span><span class="op">(</span><span class="va">iris</span>, <span class="st">"iris_in_rds.rds"</span><span class="op">)</span></span></span>
@@ -190,8 +189,8 @@ response. Defaults to <code>FALSE</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontshow{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">.old_wd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"R_USER_CONFIG_DIR"</span> <span class="op">=</span> <span class="va">.old_config_dir</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

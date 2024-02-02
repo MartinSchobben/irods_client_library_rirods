@@ -92,7 +92,7 @@
                         <h4 data-toc-skip class="author">Mariana
 Montes</h4>
             
-            <h4 data-toc-skip class="date">2024-01-29</h4>
+            <h4 data-toc-skip class="date">2024-02-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/irods/irods_client_library_rirods/blob/HEAD/vignettes/icommands.Rmd" class="external-link"><code>vignettes/icommands.Rmd</code></a></small>
       <div class="d-none name"><code>icommands.Rmd</code></div>
@@ -186,10 +186,57 @@ that the item was last modified and the size of data objects is shown by
 <code>ils -l</code> and by <code>ils(stats=TRUE)</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># ils</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                         logical_path</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection</span></span>
+<span><span class="co">#&gt;   /tempZone/home/rods/200numbers.rds</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"some_collection"</span><span class="op">)</span> <span class="co"># ils some_collection</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"some_collection"</span>, stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># ils -l some_collection</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path inheritance_enabled</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection               FALSE</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds                &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  status_code modified_at permissions.name permissions.perm permissions.type</span></span>
+<span><span class="co">#&gt;            0  1706856856             rods              own        rodsadmin</span></span>
+<span><span class="co">#&gt;            0  1706856855             rods              own        rodsadmin</span></span>
+<span><span class="co">#&gt;  permissions.zone registered        type checksum size</span></span>
+<span><span class="co">#&gt;          tempZone       TRUE  collection     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;          tempZone       TRUE data_object           832</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"some_collection"</span>, permissions<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># ils -A some_collection</span></span>
-<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>permissions<span class="op">=</span><span class="cn">TRUE</span>, stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># ils -Al</span></span></code></pre></div>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds</span></span>
+<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>permissions<span class="op">=</span><span class="cn">TRUE</span>, stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># ils -Al</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                         logical_path inheritance_enabled status_code</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection               FALSE           0</span></span>
+<span><span class="co">#&gt;   /tempZone/home/rods/200numbers.rds                &lt;NA&gt;           0</span></span>
+<span><span class="co">#&gt;  modified_at permissions.name permissions.perm permissions.type</span></span>
+<span><span class="co">#&gt;   1706856856             rods              own        rodsadmin</span></span>
+<span><span class="co">#&gt;   1706856856             rods              own        rodsadmin</span></span>
+<span><span class="co">#&gt;  permissions.zone registered        type checksum size</span></span>
+<span><span class="co">#&gt;          tempZone       TRUE  collection     &lt;NA&gt; &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;          tempZone       TRUE data_object          1632</span></span></code></pre></div>
 <p>A crucial difference between <code>ils</code> and <code><a href="../reference/ils.html">ils()</a></code>
 is that <code>ils(metadata=TRUE)</code> is used to print the metadata
 information of each element listed, whereas iCommands only provides
@@ -212,7 +259,29 @@ be used to achieve this result.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"some_collection"</span>, metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">my_files</span></span>
-<span><span class="fu">filter_ils</span><span class="op">(</span><span class="st">"random"</span>, <span class="va">my_files</span><span class="op">)</span> <span class="co"># imeta ls -d some_collection/random_numbers.rds</span></span></code></pre></div>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path    attribute  value</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds distribution normal</span></span>
+<span><span class="co">#&gt;                                                               length    100</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection         &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  units</span></span>
+<span><span class="co">#&gt;       </span></span>
+<span><span class="co">#&gt;       </span></span>
+<span><span class="co">#&gt;   &lt;NA&gt;</span></span>
+<span><span class="fu">filter_ils</span><span class="op">(</span><span class="st">"random"</span>, <span class="va">my_files</span><span class="op">)</span> <span class="co"># imeta ls -d some_collection/random_numbers.rds</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path    attribute  value</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds distribution normal</span></span>
+<span><span class="co">#&gt;                                                               length    100</span></span>
+<span><span class="co">#&gt;  units</span></span>
+<span><span class="co">#&gt;       </span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="creating-and-deleting-collections-or-data-objects">Creating and deleting collections or data objects<a class="anchor" aria-label="anchor" href="#creating-and-deleting-collections-or-data-objects"></a>
@@ -227,12 +296,35 @@ collections:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/imkdir.html">imkdir</a></span><span class="op">(</span><span class="st">"new_collection"</span><span class="op">)</span> <span class="co"># imkdir new_collection</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                         logical_path</span></span>
+<span><span class="co">#&gt;   /tempZone/home/rods/new_collection</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection</span></span>
+<span><span class="co">#&gt;   /tempZone/home/rods/200numbers.rds</span></span>
 <span></span>
 <span><span class="co"># imkdir -p another_collection/subcollection</span></span>
 <span><span class="fu"><a href="../reference/imkdir.html">imkdir</a></span><span class="op">(</span><span class="st">"another_collection/subcollection"</span>, create_parent_collections <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"another_collection"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                            logical_path</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/another_collection</span></span>
+<span><span class="co">#&gt;      /tempZone/home/rods/new_collection</span></span>
+<span><span class="co">#&gt;     /tempZone/home/rods/some_collection</span></span>
+<span><span class="co">#&gt;      /tempZone/home/rods/200numbers.rds</span></span>
+<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"another_collection"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                          logical_path</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/another_collection/subcollection</span></span></code></pre></div>
 <p>Removing data objects and collections can be achieved by
 <code>irm</code> in iCommands and <code><a href="../reference/irm.html">irm()</a></code> in
 <a href="https://github.com/irods/irods_client_library_rirods" class="external-link">rirods</a>, and both functions have a <code>force</code> and
@@ -240,9 +332,19 @@ collections:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/irm.html">irm</a></span><span class="op">(</span><span class="st">"200numbers.rds"</span>, force <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># irm 200numbers.rds</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span><span class="st">"/tempZone/trash/home/rods"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                              logical_path</span></span>
+<span><span class="co">#&gt;  /tempZone/trash/home/rods/200numbers.rds</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/irm.html">irm</a></span><span class="op">(</span><span class="st">"another_collection"</span>, force <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># irm -rf another_collection</span></span>
-<span><span class="fu"><a href="../reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME WHERE COLL_NAME LIKE '%_collection'"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/iquery.html">iquery</a></span><span class="op">(</span><span class="st">"SELECT COLL_NAME WHERE COLL_NAME LIKE '%_collection'"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                                           COLL_NAME</span></span>
+<span><span class="co">#&gt; 1                /tempZone/home/rods/new_collection</span></span>
+<span><span class="co">#&gt; 2               /tempZone/home/rods/some_collection</span></span>
+<span><span class="co">#&gt; 3 /tempZone/home/rods/some_collection/subcollection</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-and-putting-data">Getting and putting data<a class="anchor" aria-label="anchor" href="#getting-and-putting-data"></a>
@@ -320,6 +422,18 @@ specified whether a certain AVU should be added or removed.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/icd.html">icd</a></span><span class="op">(</span><span class="st">"some_collection"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path    attribute  value</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds distribution normal</span></span>
+<span><span class="co">#&gt;                                                               length    100</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection         &lt;NA&gt;   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  units</span></span>
+<span><span class="co">#&gt;       </span></span>
+<span><span class="co">#&gt;       </span></span>
+<span><span class="co">#&gt;   &lt;NA&gt;</span></span>
 <span></span>
 <span><span class="co"># imeta add -C subcollection foo bar baz</span></span>
 <span><span class="fu"><a href="../reference/imeta.html">imeta</a></span><span class="op">(</span><span class="st">"subcollection"</span>,</span>
@@ -334,7 +448,14 @@ specified whether a certain AVU should be added or removed.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation<span class="op">=</span><span class="st">"remove"</span>, attribute<span class="op">=</span><span class="st">"distribution"</span>, value<span class="op">=</span><span class="st">"normal"</span><span class="op">)</span></span>
 <span>      <span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path attribute value units</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds       foo   bar   baz</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection       foo   bar   baz</span></span></code></pre></div>
 <p>In order to “modify” an AVU with <a href="https://github.com/irods/irods_client_library_rirods" class="external-link">rirods</a>, we would have
 to remove it and add its replacement. This also illustrates how we can
 add/remove several AVUs in one <code><a href="../reference/imeta.html">imeta()</a></code> call, which would
@@ -347,7 +468,14 @@ the Python client.&lt;/p&gt;"><sup>2</sup></a>.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation<span class="op">=</span><span class="st">"remove"</span>, attribute<span class="op">=</span><span class="st">"length"</span>, value<span class="op">=</span><span class="st">"100"</span>, units<span class="op">=</span><span class="st">"items"</span><span class="op">)</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>operation<span class="op">=</span><span class="st">"add"</span>, attribute<span class="op">=</span><span class="st">"length"</span>, value<span class="op">=</span><span class="st">"100"</span>, units<span class="op">=</span><span class="st">"elements"</span><span class="op">)</span></span>
 <span>      <span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/ils.html">ils</a></span><span class="op">(</span>metadata<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt; iRODS Zone</span></span>
+<span><span class="co">#&gt; ==========</span></span>
+<span><span class="co">#&gt;                                            logical_path attribute value units</span></span>
+<span><span class="co">#&gt;  /tempZone/home/rods/some_collection/random_numbers.rds       foo   bar   baz</span></span>
+<span><span class="co">#&gt;       /tempZone/home/rods/some_collection/subcollection       foo   bar   baz</span></span></code></pre></div>
 <p>As mentioned before, whereas the iCommand <code>imeta ls</code> is
 used to list the metadata of an item, <code>ils(metadata=TRUE)</code> is
 used in <a href="https://github.com/irods/irods_client_library_rirods" class="external-link">rirods</a> instead.</p>
