@@ -76,7 +76,7 @@ access control information for each element in the collection.</p>
 <span>  permissions <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  metadata <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fu">find_irods_file</span><span class="op">(</span><span class="st">"max_number_of_rows_per_catalog_query"</span><span class="op">)</span>,</span>
 <span>  recurse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ticket <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  message <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -110,7 +110,7 @@ Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>limit</dt>
-<dd><p>Number of records to show per page. Deprecated.</p></dd>
+<dd><p>Number of records to show per page.</p></dd>
 
 
 <dt>recurse</dt>
