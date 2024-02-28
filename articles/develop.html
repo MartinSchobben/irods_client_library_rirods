@@ -131,12 +131,12 @@ a local or remote iRODS C++ HTTP API service - <a href="https://github.com/irods
 </h3>
 <p>Launch a local demonstration iRODS service (including the HTTP
 API):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clone the repository (and submodule "irods_demo")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or use `git submodule update --init` when already cloned without submodules</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> https://github.com/irods/irods_demo</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># start the REST API</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> irods_demo</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> nginx-reverse-proxy irods-client-http-api irods-client-icommands</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># clone the repository (and submodule "irods_demo")</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># or use `git submodule update --init` when already cloned without submodules</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> https://github.com/irods/irods_demo</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># start the REST API</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="bu">cd</span> irods_demo</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> nginx-reverse-proxy irods-client-http-api irods-client-icommands</span></code></pre></div>
 <p>Alternatively, one can use the R function
 <code><a href="../reference/use_irods_demo.html">use_irods_demo()</a></code>.</p>
 <p>Note, that both options can only be used if Docker and the

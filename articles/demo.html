@@ -92,7 +92,7 @@
                         <h4 data-toc-skip class="author">Mariana
 Montes</h4>
             
-            <h4 data-toc-skip class="date">2024-02-26</h4>
+            <h4 data-toc-skip class="date">2024-02-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/irods/irods_client_library_rirods/blob/HEAD/vignettes/demo.Rmd" class="external-link"><code>vignettes/demo.Rmd</code></a></small>
       <div class="d-none name"><code>demo.Rmd</code></div>
@@ -108,12 +108,12 @@ or <a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="extern
 plugin in your Linux distribution. You can check if they are installed
 like so (the command should provide the path to where your version is
 installed):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> bash</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> docker</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> docker-compose</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">which</span> bash</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">which</span> docker</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">which</span> docker-compose</span></code></pre></div>
 <p>You should also start a Docker daemon in your Linux session, for
 example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dockerd</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">sudo</span> dockerd</span></code></pre></div>
 <p>Make sure you don’t need <code>sudo</code> for <code>docker</code>,
 though, by <a href="https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user" class="external-link">adding
 yourself to the <code>docker</code> group</a>. You can check that this
@@ -164,11 +164,11 @@ you need to make sure you have the appropriate submodules to run the
 demo. Instead of installing with
 <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">devtools::install_github()</a></code>, clone the <a href="https://github.com/irods/irods_client_library_rirods" class="external-link">repository</a>
 (or a fork thereof) and update all submodules:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:irods/irods_client_library_rirods.git <span class="co"># clone your fork instead</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> irods_client_library_rirods.git <span class="co"># go to the repository</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> inst/irods_demo <span class="co"># update the demo submodule</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> inst/irods_demo <span class="co"># update the sub-submodule</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> irods_client_zone_management_tool</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:irods/irods_client_library_rirods.git <span class="co"># clone your fork instead</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="bu">cd</span> irods_client_library_rirods.git <span class="co"># go to the repository</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> inst/irods_demo <span class="co"># update the demo submodule</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="bu">cd</span> inst/irods_demo <span class="co"># update the sub-submodule</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> irods_client_zone_management_tool</span></code></pre></div>
 <p>Only then, from R, install the package with
 <code><a href="https://devtools.r-lib.org/reference/install.html" class="external-link">devtools::install()</a></code> (either from the project of the package
 or providing the path to the package).</p>
